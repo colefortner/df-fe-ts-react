@@ -1,5 +1,4 @@
 import React from "react";
-
 import Business from "./Business";
 
 interface BusinessListProps {
@@ -15,6 +14,7 @@ const BusinessList: React.FC<BusinessListProps> = (props) => {
       {props.businesses.map((business) => (
         <Business
           key={business.id}
+          businessId={business.id}
           name={business.name}
           image={business.image}
         />
