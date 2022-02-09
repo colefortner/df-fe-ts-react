@@ -12,6 +12,9 @@ const NavLinks: React.FC = () => {
       <li>
         <NavLink to="/users">Some User Link</NavLink>
       </li>
+      <li>
+        <NavLink to="/auth">Login/Signup</NavLink>
+      </li>
     </ul>
   );
 };

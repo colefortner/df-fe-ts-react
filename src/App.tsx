@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Users from "./users/pages/Users";
 import Businesses from "./businesses/pages/Businesses";
 import NavLinks from "./shared/components/navigation/NavLinks";
-
+import Auth from "./users/pages/Auth";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -14,6 +14,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/businesses" element={<Businesses />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<Navigate to="/users" />} />
       </Routes>
     </BrowserRouter>
