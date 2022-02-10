@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Auth: React.FC = () => {
-  // const usernameInputRef = useRef<HTMLInputElement>(null);
-  // const avatarInputRef = useRef<HTMLInputElement>(null);
-  // const emailInputRef = useRef<HTMLInputElement>(null);
-  // const passwordInputRef = useRef<HTMLInputElement>(null);
-  // const confirmPasswordInputRef = React.useRef<HTMLInputElement>(null);
-
   const [loginMode, setLoginMode] = useState(false);
-  // const [pickedFile, setPickedFile] = useState();
+  const [preview, setPreview] = useState<any | null>();
+  const [file, setFile] = useState<File>();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -16,12 +11,26 @@ const Auth: React.FC = () => {
     confirmPassword: "",
   });
 
+  const filePickerRef = React.useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!file) {
+      return;
+    }
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setPreview(fileReader.result);
+    };
+    fileReader.readAsDataURL(file);
+  }, [file]);
+
   const avatarChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) {
       return;
     }
-    // setPickedFile(event.target.files[0] );
-    console.log(event.target.files[0]);
+
+    let pickedFile = event.target.files[0];
+    setFile(pickedFile);
     // console.log(pickedFile);
   };
 
@@ -48,7 +57,7 @@ const Auth: React.FC = () => {
     if (loginMode) {
       data = { email: formData.email, password: formData.password };
     } else {
-      data = formData;
+      data = { ...formData, avatar: file };
     }
 
     console.log(data);
@@ -59,6 +68,8 @@ const Auth: React.FC = () => {
       password: "",
       confirmPassword: "",
     });
+
+    setPreview(null);
   };
 
   return (
@@ -88,11 +99,11 @@ const Auth: React.FC = () => {
               multiple={false}
               accept=".jpg,.png,.jpeg"
               name="avatar"
-              // placeholder="confirm password"
               onChange={avatarChangeHandler}
-              // value={pickedFile.avatar}
+              ref={filePickerRef}
               required
             />
+            <div>{preview && <img src={preview} alt="avatar preview" />}</div>
           </div>
         )}
         <div>
