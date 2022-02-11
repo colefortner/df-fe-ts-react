@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface BusinessProps {
   key: string;
@@ -9,11 +10,13 @@ interface BusinessProps {
 
 const Business: React.FC<BusinessProps> = (props) => {
   return (
-    <>
-      <h2>Business Number: {props.businessId}</h2>
-      <h2>{props.name}</h2>
-      <img src={props.image} alt={props.name} style={{ width: 200 }} />
-    </>
+    <li>
+      <Link to={`/${props.businessId}/businesses`}>
+        <h2>Business Number: {props.businessId}</h2>
+        <h2>{props.name}</h2>
+        <img src={props.image} alt={props.name} style={{ width: 200 }} />
+      </Link>
+    </li>
   );
 };
 
