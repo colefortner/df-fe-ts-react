@@ -11,7 +11,7 @@ interface BusinessProps {
 const Business: React.FC<BusinessProps> = (props) => {
   return (
     <li>
-      <Link to={`/${props.businessId}/businesses`}>
+      <Link to={`/${props.businessId}/businesses`} state={{ cardData: props }}>
         <h2>Business Number: {props.businessId}</h2>
         <h2>{props.name}</h2>
         <img src={props.image} alt={props.name} style={{ width: 200 }} />

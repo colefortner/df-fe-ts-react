@@ -101,6 +101,7 @@ const Auth: React.FC = () => {
               name="avatar"
               onChange={avatarChangeHandler}
               ref={filePickerRef}
+              // value={preview}
               required
             />
             <div>{preview && <img src={preview} alt="avatar preview" />}</div>
