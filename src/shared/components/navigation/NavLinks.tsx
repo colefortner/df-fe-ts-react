@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth-context";
 
 const NavLinks: React.FC = () => {
+  const auth = useContext(AuthContext);
+
   return (
     <ul>
       <li>
@@ -9,9 +13,11 @@ const NavLinks: React.FC = () => {
       <li>
         <NavLink to="/businesses">All businesses</NavLink>
       </li>
-      <li>
-        <NavLink to="/users">Some User Link</NavLink>
-      </li>
+      {auth.isLoggedIn && (
+        <li>
+          <NavLink to="/users">Dashboard</NavLink>
+        </li>
+      )}
       <li>
         <NavLink to="/auth">Login/Signup</NavLink>
       </li>

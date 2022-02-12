@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useLocation } from "react-router-dom";
-import Rating from "../../UIElements/Rating";
+import Rating from "../../shared/UIElements/Rating";
 
 interface Business {
   cardData: {
