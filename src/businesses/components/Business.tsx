@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Rating from "../../shared/UIElements/Rating";
+import Rating from "../../shared/components/UIElements/Rating";
 
 interface BusinessProps {
   key: string;
