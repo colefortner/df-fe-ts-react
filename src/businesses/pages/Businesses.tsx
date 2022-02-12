@@ -7,12 +7,14 @@ const Businesses: React.FC = () => {
       name: "Pinellas Ale House",
       image:
         "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/61/d7/ab/paw-brewery-tap-room.jpg?w=1000&h=-1&s=1",
+      rating: 4,
     },
     {
       id: "2",
       name: "Dog House",
       image:
         "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/61/d7/ab/paw-brewery-tap-room.jpg?w=1000&h=-1&s=1",
+      rating: 4.5,
     },
   ];
   return <BusinessList businesses={businesses_data} />;

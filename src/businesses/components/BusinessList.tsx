@@ -2,7 +2,7 @@ import React from "react";
 import Business from "./Business";
 
 interface BusinessListProps {
-  businesses: { id: string; name: string; image: string }[];
+  businesses: { id: string; name: string; image: string; rating: number }[];
 }
 
 const BusinessList: React.FC<BusinessListProps> = (props) => {
@@ -17,6 +17,7 @@ const BusinessList: React.FC<BusinessListProps> = (props) => {
           businessId={business.id}
           name={business.name}
           image={business.image}
+          rating={business.rating}
         />
       ))}
     </ul>
