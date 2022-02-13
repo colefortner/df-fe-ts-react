@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import CommentForm from "../../shared/components/comments/ComentForm";
+import RatingForm from "../../shared/components/comments/RatingForm";
 
 interface Business {
   cardData: {
@@ -27,6 +28,7 @@ const BusinessShowPage: React.FC = () => {
       <img src={cardData.image} alt={cardData.name} style={{ width: 200 }} />
       <Rating rating={cardData.rating} />
       <CommentForm />
+      <RatingForm />
     </>
   );
 };
