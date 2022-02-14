@@ -8,6 +8,10 @@ interface BusinessProps {
   name: string;
   image: string;
   rating: number;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
 }
 
 const Business: React.FC<BusinessProps> = (props) => {

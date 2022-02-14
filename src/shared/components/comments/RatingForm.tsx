@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PawRatingUntouched from "../UIElements/Paws/PawRatingUntouched";
 import PawRatingHovered from "../UIElements/Paws/PawRatingHovered";
@@ -38,15 +38,28 @@ const RatingBox = styled.div`
 `;
 
 const RatingForm: React.FC = () => {
+  const [review, setReview] = useState<undefined | number>();
+
+  const setRating = (
+    ratingSelection: number,
+    event: React.MouseEvent<HTMLLabelElement>
+  ) => {
+    event.preventDefault();
+    setReview(ratingSelection);
+    // debugger;
+  };
+
   const ratingMenu = [5, 4, 3, 2, 1].map((ratingSelection, index) => {
     return (
       <>
         <input
           type="radio"
+          value={ratingSelection}
+          checked={review === ratingSelection}
           onChange={() => console.log("selected", ratingSelection)}
           id={`rating-${ratingSelection}`}
         />
-        <label></label>
+        <label onClick={setRating.bind(this, ratingSelection)}></label>
       </>
     );
   });

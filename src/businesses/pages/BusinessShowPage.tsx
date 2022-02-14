@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import CommentForm from "../../shared/components/comments/ComentForm";
 import RatingForm from "../../shared/components/comments/RatingForm";
+import Map from "../../shared/components/UIElements/Maps/Map";
 
 interface Business {
   cardData: {
@@ -11,6 +12,10 @@ interface Business {
     name: string;
     image: string;
     rating: number;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
   };
 }
 
@@ -29,6 +34,9 @@ const BusinessShowPage: React.FC = () => {
       <Rating rating={cardData.rating} />
       <CommentForm />
       <RatingForm />
+      <div style={{ width: "400px", height: "400px" }}>
+        <Map center={cardData.coordinates} zoom={10} />
+      </div>
     </>
   );
 };

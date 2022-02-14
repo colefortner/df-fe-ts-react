@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/googlemaps": "^3.43.3",
     "@types/styled-components": "^5.1.22"
   }
 }
