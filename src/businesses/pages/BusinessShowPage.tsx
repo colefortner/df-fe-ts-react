@@ -12,7 +12,7 @@ interface Business {
     name: string;
     image: string;
     rating: number;
-    coordinates: {
+    location: {
       lat: number;
       lng: number;
     };
@@ -35,7 +35,7 @@ const BusinessShowPage: React.FC = () => {
       <CommentForm />
       <RatingForm />
       <div style={{ width: "400px", height: "400px" }}>
-        <Map center={cardData.coordinates} zoom={10} />
+        <Map center={cardData.location} zoom={10} />
       </div>
     </>
   );

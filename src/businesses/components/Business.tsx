@@ -8,7 +8,7 @@ interface BusinessProps {
   name: string;
   image: string;
   rating: number;
-  coordinates: {
+  location: {
     lat: number;
     lng: number;
   };

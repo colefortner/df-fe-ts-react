@@ -7,7 +7,7 @@ interface BusinessListProps {
     name: string;
     image: string;
     rating: number;
-    coordinates: {
+    location: {
       lat: number;
       lng: number;
     };
@@ -27,7 +27,7 @@ const BusinessList: React.FC<BusinessListProps> = (props) => {
           name={business.name}
           image={business.image}
           rating={business.rating}
-          coordinates={business.coordinates}
+          location={business.location}
         />
       ))}
     </ul>
