@@ -4,7 +4,7 @@ const Auth: React.FC = () => {
   const [loginMode, setLoginMode] = useState(false);
   const [preview, setPreview] = useState<any | null>();
   const [file, setFile] = useState<File>();
-  const [formData, setFormData] = useState({
+  const [formState, setFormState] = useState({
     username: "",
     email: "",
     password: "",
@@ -25,13 +25,10 @@ const Auth: React.FC = () => {
   }, [file]);
 
   const avatarChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
-      return;
+    if (event.target.files && event.target.files.length === 1) {
+      let pickedFile = event.target.files[0];
+      setFile(pickedFile);
     }
-
-    let pickedFile = event.target.files[0];
-    setFile(pickedFile);
-    // console.log(pickedFile);
   };
 
   const changeModeHandler = () => {
@@ -41,9 +38,9 @@ const Auth: React.FC = () => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    setFormData((prevFormData) => {
+    setFormState((prevFormState) => {
       return {
-        ...prevFormData,
+        ...prevFormState,
         [name]: value,
       };
     });
@@ -55,14 +52,30 @@ const Auth: React.FC = () => {
     let data;
 
     if (loginMode) {
-      data = { email: formData.email, password: formData.password };
+      data = { email: formState.email, password: formState.password };
     } else {
-      data = { ...formData, avatar: file };
+      if (file) {
+        const formData = new FormData();
+        formData.append("id", "1");
+        formData.append("username", formState.username);
+        formData.append("email", formState.email);
+        formData.append("password", formState.password);
+        formData.append("image", file);
+        console.log(file);
+        data = { ...formState, image: file };
+        console.log(formData);
+        console.log(data);
+
+        fetch("http://localhost:5050/users", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+      }
     }
 
-    console.log(data);
-
-    setFormData({
+    setFormState({
       username: "",
       email: "",
       password: "",
@@ -85,23 +98,23 @@ const Auth: React.FC = () => {
               placeholder="username"
               name="username"
               onChange={changeHandler}
-              value={formData.username}
+              value={formState.username}
               required
             />
           </div>
         )}
         {!loginMode && (
           <div>
-            <label htmlFor="avatar">Upload Avatar</label>
+            <label htmlFor="image">Upload Avatar</label>
             <input
-              id="avatar"
+              id="image"
               type="file"
               multiple={false}
               accept=".jpg,.png,.jpeg"
-              name="avatar"
+              name="image"
               onChange={avatarChangeHandler}
               ref={filePickerRef}
-              // value={preview}
+              // value={formState.image}
               required
             />
             <div>{preview && <img src={preview} alt="avatar preview" />}</div>
@@ -115,7 +128,7 @@ const Auth: React.FC = () => {
             placeholder="email"
             name="email"
             onChange={changeHandler}
-            value={formData.email}
+            value={formState.email}
             required
           />
         </div>
@@ -127,7 +140,7 @@ const Auth: React.FC = () => {
             placeholder="password"
             name="password"
             onChange={changeHandler}
-            value={formData.password}
+            value={formState.password}
             required
           />
         </div>
@@ -140,7 +153,7 @@ const Auth: React.FC = () => {
               placeholder="confirm password"
               name="confirmPassword"
               onChange={changeHandler}
-              value={formData.confirmPassword}
+              value={formState.confirmPassword}
               required
             />
           </div>
