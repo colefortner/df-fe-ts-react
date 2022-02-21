@@ -24,7 +24,6 @@ const BusinessShowPage: React.FC = () => {
   const location = useLocation();
   const state = location.state as Business;
   const { cardData } = state;
-  // console.log(cardData);
 
   return (
     <>
