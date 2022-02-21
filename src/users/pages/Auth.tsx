@@ -49,10 +49,19 @@ const Auth: React.FC = () => {
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    let data;
-
     if (loginMode) {
-      data = { email: formState.email, password: formState.password };
+      fetch("http://localhost:5050/users/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: formState.email,
+          password: formState.password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
     } else {
       if (file) {
         const formData = new FormData();
@@ -62,9 +71,7 @@ const Auth: React.FC = () => {
         formData.append("password", formState.password);
         formData.append("image", file);
         console.log(file);
-        data = { ...formState, image: file };
         console.log(formData);
-        console.log(data);
 
         fetch("http://localhost:5050/users", {
           method: "POST",
