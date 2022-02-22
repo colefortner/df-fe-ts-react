@@ -47,6 +47,22 @@ const RatingForm: React.FC = () => {
     event.preventDefault();
     setReview(ratingSelection);
     // debugger;
+    // console.log(review);
+  };
+
+  const submitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    fetch("http://localhost:5050/ratings", {
+      method: "POST",
+      body: JSON.stringify({
+        rating: review,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   };
 
   const ratingMenu = [5, 4, 3, 2, 1].map((ratingSelection, index) => {
@@ -64,7 +80,11 @@ const RatingForm: React.FC = () => {
     );
   });
 
-  return <RatingBox>{ratingMenu}</RatingBox>;
+  return (
+    <form onSubmit={submitHandler}>
+      <RatingBox>{ratingMenu}</RatingBox>;
+      <button type="submit">Submit Rating</button>
+    </form>
+  );
 };
-
 export default RatingForm;
