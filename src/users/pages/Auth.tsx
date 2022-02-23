@@ -65,7 +65,6 @@ const Auth: React.FC = () => {
     } else {
       if (file) {
         const formData = new FormData();
-        formData.append("id", "1");
         formData.append("username", formState.username);
         formData.append("email", formState.email);
         formData.append("password", formState.password);
