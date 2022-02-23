@@ -35,9 +35,9 @@ const BusinessShowPage: React.FC = () => {
       <Comments />
       <CommentForm />
       <RatingForm />
-      <div style={{ width: "400px", height: "400px" }}>
+      {/* <div style={{ width: "400px", height: "400px" }}>
         <Map center={cardData.location} zoom={10} />
-      </div>
+      </div> */}
     </>
   );
 };
