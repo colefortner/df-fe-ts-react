@@ -1,6 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../../shared/context/auth-context";
 
 const Auth: React.FC = () => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [loginMode, setLoginMode] = useState(false);
   const [preview, setPreview] = useState<any | null>();
   const [file, setFile] = useState<File>();
@@ -61,7 +67,12 @@ const Auth: React.FC = () => {
         },
       })
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          console.log(data);
+          auth.login(data.userId, data.token);
+        });
+
+      navigate("/");
     } else {
       if (file) {
         const formData = new FormData();
@@ -77,7 +88,10 @@ const Auth: React.FC = () => {
           body: formData,
         })
           .then((response) => response.json())
-          .then((data) => console.log(data));
+          .then((data) => {
+            console.log(data);
+            auth.login(data.userId, data.token);
+          });
       }
     }
 
