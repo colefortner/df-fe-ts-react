@@ -20,7 +20,7 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    fetch("http://localhost:5050/users/save-business", {
+    fetch("http://localhost:5050/dashboard/save-business", {
       method: "POST",
       body: JSON.stringify({
         businessId: props.businessId,
@@ -36,7 +36,7 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   const deleteHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    fetch("http://localhost:5050/users/delete-business/1", {
+    fetch("http://localhost:5050/dashboard/delete-business/1", {
       method: "DELETE",
       body: JSON.stringify({
         businessId: props.businessId,
