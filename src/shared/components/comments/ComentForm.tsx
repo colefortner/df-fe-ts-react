@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../context/auth-context";
 
-const CommentForm: React.FC = () => {
+interface CommentFormProps {
+  businessId: string | undefined;
+}
+
+const CommentForm: React.FC<CommentFormProps> = (props) => {
   const [comment, setComment] = useState<string>();
+  const auth = useContext(AuthContext);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setComment(event.target.value);
@@ -9,9 +15,10 @@ const CommentForm: React.FC = () => {
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    fetch("http://localhost:5050/comments", {
+    fetch(`http://localhost:5050/comments/${props.businessId}`, {
       method: "POST",
       body: JSON.stringify({
+        userId: auth.userId,
         comment: comment,
       }),
       headers: {

@@ -7,6 +7,7 @@ interface CommentProps {
   key: string;
   id: string;
   review: string;
+  businessId: string;
 }
 
 const Comment: React.FC<CommentProps> = (props) => {
@@ -44,7 +45,7 @@ const Comment: React.FC<CommentProps> = (props) => {
         Comment Number: {props.id} Comment: {props.review}
       </h2>
       <button onClick={deleteHandler}>Delete</button>
-      {editMode === true && <CommentForm />}
+      {editMode === true && <CommentForm businessId={props.businessId} />}
       <button onClick={editModeHandler}>Edit</button>
     </li>
   );

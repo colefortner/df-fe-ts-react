@@ -17,6 +17,10 @@ interface Business {
       lat: number;
       lng: number;
     };
+    comments: {
+      userId: string;
+      comment: string;
+    }[];
   };
 }
 
@@ -26,14 +30,15 @@ const BusinessShowPage: React.FC = () => {
   const state = location.state as Business;
   const { cardData } = state;
 
+  // console.log(cardData.businessId);
   return (
     <>
       <p>{params.businessId}</p>
       <p>{cardData.name}</p>
       <img src={cardData.image} alt={cardData.name} style={{ width: 200 }} />
       <Rating rating={cardData.rating} />
-      <Comments />
-      <CommentForm />
+      <Comments businessId={cardData.businessId} />
+      <CommentForm businessId={params.businessId} />
       <RatingForm />
       {/* <div style={{ width: "400px", height: "400px" }}>
         <Map center={cardData.location} zoom={10} />
