@@ -5,6 +5,7 @@ interface CommentsListProps {
   businessId: string | undefined;
   comments: {
     _id: string;
+    userId: string;
     comment: string;
   }[];
 }
@@ -21,6 +22,7 @@ const CommentList: React.FC<CommentsListProps> = (props) => {
           review={comment.comment}
           id={comment._id}
           businessId={props.businessId}
+          commentUserId={comment.userId}
         />
       ))}
     </ul>
