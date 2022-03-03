@@ -15,7 +15,7 @@ interface BusinessListProps {
 }
 
 const BusinessList: React.FC<BusinessListProps> = (props) => {
-  if (props.businesses.length === 0) {
+  if (props.businesses === undefined) {
     return <h2>No businesses found</h2>;
   }
   return (
