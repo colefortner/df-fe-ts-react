@@ -4,7 +4,7 @@ import Comment from "./Comment";
 interface CommentsListProps {
   businessId: string | undefined;
   comments: {
-    id: string;
+    _id: string;
     comment: string;
   }[];
 }
@@ -17,9 +17,9 @@ const CommentList: React.FC<CommentsListProps> = (props) => {
     <ul>
       {props.comments.map((comment, index) => (
         <Comment
-          key={comment.id}
+          key={comment._id}
           review={comment.comment}
-          id={comment.id}
+          id={comment._id}
           businessId={props.businessId}
         />
       ))}

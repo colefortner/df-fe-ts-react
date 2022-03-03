@@ -14,7 +14,7 @@ const Comment: React.FC<CommentProps> = (props) => {
   const [editMode, setEditMode] = useState(false);
 
   const deleteHandler = () => {
-    fetch(`http://localhost:5050/comments/${props.id}`, {
+    fetch(`http://localhost:5050/comments/${props.businessId}/${props.id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -42,7 +42,7 @@ const Comment: React.FC<CommentProps> = (props) => {
   return (
     <li>
       <h2>
-        Comment Number: {props.businessId} Comment: {props.review}
+        Comment Number: {props.id} Comment: {props.review}
       </h2>
       <button onClick={deleteHandler}>Delete</button>
       {editMode === true && <CommentForm businessId={props.businessId} />}
