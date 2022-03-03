@@ -47,10 +47,12 @@ const Comment: React.FC<CommentProps> = (props) => {
       <h2>
         Comment Number: {props.id} Comment: {props.review}
       </h2>
-      <button onClick={deleteHandler}>Delete</button>
       {editMode === true && <CommentForm businessId={props.businessId} />}
       {auth.userId === props.commentUserId && (
-        <button onClick={editModeHandler}>Edit</button>
+        <>
+          <button onClick={editModeHandler}>Edit</button>
+          <button onClick={deleteHandler}>Delete</button>
+        </>
       )}
     </li>
   );
