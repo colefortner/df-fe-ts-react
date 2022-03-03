@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import CommentForm from "./ComentForm";
+import { AuthContext } from "../../context/auth-context";
 
 interface CommentProps {
   // key: number;
   key: string;
   id: string;
+  commentUserId: string;
   review: string;
   businessId: string | undefined;
 }
 
 const Comment: React.FC<CommentProps> = (props) => {
+  const auth = useContext(AuthContext);
   const [editMode, setEditMode] = useState(false);
 
   const deleteHandler = () => {
@@ -46,7 +49,9 @@ const Comment: React.FC<CommentProps> = (props) => {
       </h2>
       <button onClick={deleteHandler}>Delete</button>
       {editMode === true && <CommentForm businessId={props.businessId} />}
-      <button onClick={editModeHandler}>Edit</button>
+      {auth.userId === props.commentUserId && (
+        <button onClick={editModeHandler}>Edit</button>
+      )}
     </li>
   );
 };
