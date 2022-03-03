@@ -2,7 +2,7 @@ import React from "react";
 import Comment from "./Comment";
 
 interface CommentsListProps {
-  businessId: string;
+  businessId: string | undefined;
   comments: {
     id: string;
     comment: string;
