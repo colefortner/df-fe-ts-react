@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import Comments from "../../shared/components/comments/Comments";
-import RatingForm from "../../shared/components/comments/RatingForm";
-import Map from "../../shared/components/UIElements/Maps/Map";
+// import RatingForm from "../../shared/components/comments/RatingForm";
+// import Map from "../../shared/components/UIElements/Maps/Map";
 
 interface Business {
   cardData: {
@@ -36,7 +36,7 @@ const BusinessShowPage: React.FC = () => {
       <img src={cardData.image} alt={cardData.name} style={{ width: 200 }} />
       <Rating rating={cardData.rating} />
       <Comments businessId={cardData.businessId} />
-      <RatingForm />
+      {/* <RatingForm /> */}
       {/* <div style={{ width: "400px", height: "400px" }}>
         <Map center={cardData.location} zoom={10} />
       </div> */}

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/auth-context";
+import RatingForm from "./RatingForm";
 
 interface CommentFormProps {
   businessId: string | undefined;
@@ -7,10 +8,15 @@ interface CommentFormProps {
 
 const CommentForm: React.FC<CommentFormProps> = (props) => {
   const [comment, setComment] = useState<string>();
+  const [review, setReview] = useState<undefined | number>();
   const auth = useContext(AuthContext);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setComment(event.target.value);
+  };
+
+  const childCallback = (value: undefined | number) => {
+    setReview(value);
   };
 
   const submitHandler = (event: React.FormEvent) => {
@@ -20,6 +26,7 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
       body: JSON.stringify({
         userId: auth.userId,
         comment: comment,
+        rating: review,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -44,6 +51,7 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
             // value={comment}
           />
         </div>
+        <RatingForm childCallback={childCallback} />
         <button type="submit">Submit Comment</button>
       </form>
     </>

@@ -36,8 +36,11 @@ const RatingBox = styled.div`
   background-image: url("data:image/svg+xml;charset=UTF-8,${PawRatingHovered}");
   }
 `;
+interface RatingProps {
+  childCallback: (something: number | undefined) => void;
+}
 
-const RatingForm: React.FC = () => {
+const RatingForm: React.FC<RatingProps> = (props) => {
   const [review, setReview] = useState<undefined | number>();
 
   const setRating = (
@@ -46,6 +49,7 @@ const RatingForm: React.FC = () => {
   ) => {
     event.preventDefault();
     setReview(ratingSelection);
+    props.childCallback(ratingSelection);
     // debugger;
     // console.log(review);
   };
@@ -83,7 +87,7 @@ const RatingForm: React.FC = () => {
   return (
     <form onSubmit={submitHandler}>
       <RatingBox>{ratingMenu}</RatingBox>;
-      <button type="submit">Submit Rating</button>
+      {/* <button type="submit">Submit Rating</button> */}
     </form>
   );
 };
