@@ -1,5 +1,6 @@
 import React from "react";
 import Comment from "./Comment";
+import Rating from "../UIElements/Rating";
 
 interface CommentsListProps {
   businessId: string | undefined;
@@ -7,6 +8,7 @@ interface CommentsListProps {
     _id: string;
     userId: string;
     comment: string;
+    rating: number;
   }[];
 }
 
@@ -17,13 +19,16 @@ const CommentList: React.FC<CommentsListProps> = (props) => {
   return (
     <ul>
       {props.comments.map((comment, index) => (
-        <Comment
-          key={comment._id}
-          review={comment.comment}
-          id={comment._id}
-          businessId={props.businessId}
-          commentUserId={comment.userId}
-        />
+        <>
+          <Rating rating={comment.rating} />
+          <Comment
+            key={comment._id}
+            review={comment.comment}
+            id={comment._id}
+            businessId={props.businessId}
+            commentUserId={comment.userId}
+          />
+        </>
       ))}
     </ul>
   );
