@@ -8,10 +8,21 @@ const Businesses: React.FC = () => {
   useEffect(() => {
     fetch("http://localhost:5050/businesses")
       .then((res) => res.json())
-      .then((data) => setBusinessesData(data.businesses));
+      .then((data) => {
+        setBusinessesData(data.businesses);
+        console.log(data.businesses[1].users);
+      });
   }, []);
 
-  return <BusinessList businesses={businessesData} />;
+  // console.log(businessesData[1].);
+
+  return (
+    <BusinessList
+      businesses={businessesData}
+      dashboard={false}
+      landing={true}
+    />
+  );
 };
 
 export default Businesses;

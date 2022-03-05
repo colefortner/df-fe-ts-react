@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import { AuthContext } from "../../shared/context/auth-context";
 
 interface BusinessProps {
+  saved: boolean;
+  dashboard: boolean;
+  landing: boolean;
   key: string;
   businessId: string;
   name: string;
@@ -17,6 +20,15 @@ interface BusinessProps {
 
 const Business: React.FC<BusinessProps> = (props) => {
   const auth = useContext(AuthContext);
+  const [isDashboard, setIsDashboard] = useState<Boolean>();
+  const [isLanding, setIsLanding] = useState<Boolean>();
+  const [isSaved, setIsSaved] = useState<Boolean>();
+
+  useEffect(() => {
+    setIsDashboard(props.dashboard);
+    setIsLanding(props.landing);
+    setIsSaved(props.saved);
+  }, []);
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -58,8 +70,12 @@ const Business: React.FC<BusinessProps> = (props) => {
         <img src={props.image} alt={props.name} style={{ width: 200 }} />
         <Rating rating={props.rating} />
       </Link>
-      <button onClick={submitHandler}>Add Business to Dashboard</button>
-      <button onClick={deleteHandler}>Delete Business From Dashboard</button>
+      {isLanding && !isSaved && (
+        <button onClick={submitHandler}>Add Business to Dashboard</button>
+      )}
+      {isDashboard && (
+        <button onClick={deleteHandler}>Delete Business From Dashboard</button>
+      )}
     </li>
   );
 };

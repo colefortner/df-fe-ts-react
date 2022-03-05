@@ -42,7 +42,11 @@ const Users: React.FC = () => {
   return (
     <div>
       <h2>Dashboard Title</h2>
-      <BusinessList businesses={businessData} />
+      <BusinessList
+        businesses={businessData}
+        dashboard={true}
+        landing={false}
+      />
       <h2>Promotion Announcements ?</h2>
       <h2>Friends Checked in ?</h2>
     </div>
