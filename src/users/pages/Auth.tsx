@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigationType, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../shared/context/auth-context";
 
@@ -93,6 +93,7 @@ const Auth: React.FC = () => {
             auth.login(data.userId, data.token);
           });
       }
+      navigate("/");
     }
 
     setFormState({
