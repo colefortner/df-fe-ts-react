@@ -70,7 +70,7 @@ const Business: React.FC<BusinessProps> = (props) => {
         <img src={props.image} alt={props.name} style={{ width: 200 }} />
         <Rating rating={props.rating} />
       </Link>
-      {isLanding && !isSaved && (
+      {isLanding && !isSaved && auth.isLoggedIn && (
         <button onClick={submitHandler}>Add Business to Dashboard</button>
       )}
       {isDashboard && (
