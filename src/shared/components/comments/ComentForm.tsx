@@ -4,10 +4,11 @@ import RatingForm from "./RatingForm";
 
 interface CommentFormProps {
   businessId: string | undefined;
+  review: string;
 }
 
 const CommentForm: React.FC<CommentFormProps> = (props) => {
-  const [comment, setComment] = useState<string>();
+  const [comment, setComment] = useState<string>(props.review);
   const [review, setReview] = useState<undefined | number>();
   const auth = useContext(AuthContext);
 
@@ -48,7 +49,7 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
             placeholder="comment"
             name="comment"
             onChange={changeHandler}
-            // value={comment}
+            value={comment}
           />
         </div>
         <RatingForm childCallback={childCallback} />

@@ -29,7 +29,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
     <>
       <CommentsList businessId={props.businessId} comments={commentsData} />
       {hasCommented === false && auth.isLoggedIn && (
-        <CommentForm businessId={props.businessId} />
+        <CommentForm businessId={props.businessId} review="" />
       )}
     </>
   );

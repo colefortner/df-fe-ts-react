@@ -14,7 +14,7 @@ interface CommentProps {
 
 const Comment: React.FC<CommentProps> = (props) => {
   const auth = useContext(AuthContext);
-  const [editMode, setEditMode] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const deleteHandler = () => {
     fetch(`http://localhost:5050/comments/${props.businessId}/${props.id}`, {
@@ -34,7 +34,7 @@ const Comment: React.FC<CommentProps> = (props) => {
 
   const editModeHandler = () => {
     // if (editMode === false) {
-    setEditMode(!editMode);
+    setIsEditing(!isEditing);
     // }
 
     // if (editMode === true) {
@@ -44,15 +44,20 @@ const Comment: React.FC<CommentProps> = (props) => {
 
   return (
     <li>
-      <h2>
-        Comment Number: {props.id} Comment: {props.review}
-      </h2>
-      {editMode === true && <CommentForm businessId={props.businessId} />}
-      {auth.userId === props.commentUserId && (
+      {isEditing === true ? (
+        <CommentForm businessId={props.businessId} review={props.review} />
+      ) : (
+        <h2>
+          Comment Number: {props.id} Comment: {props.review}
+        </h2>
+      )}
+      {auth.userId === props.commentUserId && !isEditing ? (
         <>
           <button onClick={editModeHandler}>Edit</button>
           <button onClick={deleteHandler}>Delete</button>
         </>
+      ) : (
+        <button onClick={editModeHandler}>Cancel edit</button>
       )}
     </li>
   );
