@@ -5,6 +5,9 @@ import RatingForm from "./RatingForm";
 interface CommentFormProps {
   businessId: string | undefined;
   review: string;
+  commentId: string;
+  isEditing: boolean | null;
+  doneEditing: (value: boolean) => void;
 }
 
 const CommentForm: React.FC<CommentFormProps> = (props) => {
@@ -34,12 +37,34 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
       },
     })
       .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
+  const editHandler = (event: React.FormEvent) => {
+    event?.preventDefault();
+    fetch(
+      `http://localhost:5050/comments/${props.businessId}/${props.commentId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          comment: comment,
+          rating: review,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => res.json())
       .then((data) => console.log(data));
+    props.doneEditing(false);
   };
 
   return (
     <>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={props.isEditing ? editHandler : submitHandler}>
         <div>{comment}</div>
         <div>
           <label htmlFor="comment">Comment</label>
@@ -53,7 +78,9 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
           />
         </div>
         <RatingForm childCallback={childCallback} />
-        <button type="submit">Submit Comment</button>
+        <button type="submit">
+          {props.isEditing ? "Submit Edit" : "Submit Comment"}
+        </button>
       </form>
     </>
   );
