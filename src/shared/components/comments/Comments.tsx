@@ -21,20 +21,40 @@ const Comments: React.FC<CommentsProps> = (props) => {
       });
   }, []);
 
+  const addComment = (
+    commentId: string,
+    userId: string,
+    comment: string,
+    rating: number
+  ) => {
+    let something = {
+      commentId,
+      userId,
+      comment,
+      rating,
+    };
+    setCommentsData([...commentsData, something]);
+  };
+
   const hasCommented = commentsData.some(
     (comment) => comment.userId === auth.userId
   );
 
   return (
     <>
-      <CommentsList businessId={props.businessId} comments={commentsData} />
+      <CommentsList
+        businessId={props.businessId}
+        comments={commentsData}
+        addComment={addComment}
+      />
       {hasCommented === false && auth.isLoggedIn && (
         <CommentForm
           businessId={props.businessId}
-          review=""
+          reviewComment=""
           commentId=""
           isEditing={null}
           doneEditing={() => {}}
+          addComment={addComment}
         />
       )}
     </>

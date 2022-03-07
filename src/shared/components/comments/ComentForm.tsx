@@ -4,14 +4,20 @@ import RatingForm from "./RatingForm";
 
 interface CommentFormProps {
   businessId: string | undefined;
-  review: string;
+  reviewComment: string;
   commentId: string;
   isEditing: boolean | null;
   doneEditing: (value: boolean) => void;
+  addComment: (
+    commentId: string,
+    userId: string,
+    comment: string,
+    review: number
+  ) => void;
 }
 
 const CommentForm: React.FC<CommentFormProps> = (props) => {
-  const [comment, setComment] = useState<string>(props.review);
+  const [comment, setComment] = useState<string>(props.reviewComment);
   const [review, setReview] = useState<undefined | number>();
   const auth = useContext(AuthContext);
 
@@ -40,6 +46,9 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
       .then((data) => {
         console.log(data);
       });
+    if (review && auth.userId) {
+      props.addComment(props.commentId, auth.userId, comment, review);
+    }
   };
 
   const editHandler = (event: React.FormEvent) => {

@@ -10,6 +10,12 @@ interface CommentProps {
   commentUserId: string;
   review: string;
   businessId: string | undefined;
+  addComment: (
+    commentId: string,
+    userId: string,
+    comment: string,
+    review: number
+  ) => void;
 }
 
 const Comment: React.FC<CommentProps> = (props) => {
@@ -38,10 +44,11 @@ const Comment: React.FC<CommentProps> = (props) => {
         <>
           <CommentForm
             businessId={props.businessId}
-            review={props.review}
+            reviewComment={props.review}
             commentId={props.id}
             isEditing={isEditing}
             doneEditing={doneEditing}
+            addComment={props.addComment}
           />
           <button onClick={editModeHandler}>Cancel edit</button>
         </>

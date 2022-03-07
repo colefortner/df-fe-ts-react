@@ -4,6 +4,13 @@ import Rating from "../UIElements/Rating";
 
 interface CommentsListProps {
   businessId: string | undefined;
+  addComment: (
+    commentId: string,
+    userId: string,
+    comment: string,
+    rating: number
+  ) => void;
+
   comments: {
     _id: string;
     userId: string;
@@ -27,6 +34,7 @@ const CommentList: React.FC<CommentsListProps> = (props) => {
             id={comment._id}
             businessId={props.businessId}
             commentUserId={comment.userId}
+            addComment={props.addComment}
           />
         </>
       ))}
