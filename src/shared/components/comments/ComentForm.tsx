@@ -14,6 +14,7 @@ interface CommentFormProps {
     comment: string,
     review: number
   ) => void;
+  deleteComment: (id: string) => void;
 }
 
 const CommentForm: React.FC<CommentFormProps> = (props) => {

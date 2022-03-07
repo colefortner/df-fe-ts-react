@@ -16,6 +16,7 @@ interface CommentProps {
     comment: string,
     review: number
   ) => void;
+  deleteComment: (id: string) => void;
 }
 
 const Comment: React.FC<CommentProps> = (props) => {
@@ -32,6 +33,7 @@ const Comment: React.FC<CommentProps> = (props) => {
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
+    props.deleteComment(props.id);
   };
 
   const editModeHandler = () => {
@@ -49,6 +51,7 @@ const Comment: React.FC<CommentProps> = (props) => {
             isEditing={isEditing}
             doneEditing={doneEditing}
             addComment={props.addComment}
+            deleteComment={props.deleteComment}
           />
           <button onClick={editModeHandler}>Cancel edit</button>
         </>

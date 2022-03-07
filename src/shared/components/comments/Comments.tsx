@@ -36,6 +36,14 @@ const Comments: React.FC<CommentsProps> = (props) => {
     setCommentsData([...commentsData, something]);
   };
 
+  const deleteComment = (commentId: string) => {
+    console.log("COMMENTIS", commentId);
+    setCommentsData((prevState) => {
+      const comments = prevState.filter((comment) => comment._id !== commentId);
+      return comments;
+    });
+  };
+
   const hasCommented = commentsData.some(
     (comment) => comment.userId === auth.userId
   );
@@ -46,6 +54,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
         businessId={props.businessId}
         comments={commentsData}
         addComment={addComment}
+        deleteComment={deleteComment}
       />
       {hasCommented === false && auth.isLoggedIn && (
         <CommentForm
@@ -55,6 +64,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
           isEditing={null}
           doneEditing={() => {}}
           addComment={addComment}
+          deleteComment={deleteComment}
         />
       )}
     </>
