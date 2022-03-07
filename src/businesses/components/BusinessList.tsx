@@ -5,6 +5,8 @@ import Business from "./Business";
 interface BusinessListProps {
   dashboard: boolean;
   landing: boolean;
+  removeBusinessFromDashboard: (id: string | any) => void;
+
   businesses: {
     _id: string;
     name: string;
@@ -37,6 +39,7 @@ const BusinessList: React.FC<BusinessListProps> = (props) => {
           dashboard={props.dashboard}
           landing={props.landing}
           saved={auth.userId ? business.users.includes(auth.userId) : false}
+          removeBusinessFromDashboard={props.removeBusinessFromDashboard}
         />
       ))}
     </ul>

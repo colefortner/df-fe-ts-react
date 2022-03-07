@@ -4,6 +4,8 @@ import Rating from "../../shared/components/UIElements/Rating";
 import { AuthContext } from "../../shared/context/auth-context";
 
 interface BusinessProps {
+  removeBusinessFromDashboard: (id: string) => void;
+
   saved: boolean;
   dashboard: boolean;
   landing: boolean;
@@ -62,6 +64,7 @@ const Business: React.FC<BusinessProps> = (props) => {
       .then((response) => response.json())
       .then((data) => console.log(data));
     setIsSaved(false);
+    props.removeBusinessFromDashboard(props.businessId);
   };
 
   return (

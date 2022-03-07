@@ -3,7 +3,7 @@ import BusinessList from "../../businesses/components/BusinessList";
 import { AuthContext } from "../../shared/context/auth-context";
 
 const Users: React.FC = () => {
-  const [businessData, setBusinessData] = useState([]);
+  const [businessData, setBusinessData] = useState<any[]>([]);
   const auth = useContext(AuthContext);
   console.log(auth.userId);
   useEffect(() => {
@@ -14,6 +14,15 @@ const Users: React.FC = () => {
         console.log(data.businesses);
       });
   }, []);
+
+  const removeBusinessCardFromDashboard = (businessId: string) => {
+    setBusinessData((prevState) => {
+      const businesses = prevState.filter(
+        (business) => business._id !== businessId
+      );
+      return businesses;
+    });
+  };
   // const saved_businesses = [
   //   {
   //     id: "1",
@@ -46,6 +55,7 @@ const Users: React.FC = () => {
         businesses={businessData}
         dashboard={true}
         landing={false}
+        removeBusinessFromDashboard={removeBusinessCardFromDashboard}
       />
       <h2>Promotion Announcements ?</h2>
       <h2>Friends Checked in ?</h2>

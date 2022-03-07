@@ -21,6 +21,7 @@ const Businesses: React.FC = () => {
       businesses={businessesData}
       dashboard={false}
       landing={true}
+      removeBusinessFromDashboard={(id: any) => {}}
     />
   );
 };
