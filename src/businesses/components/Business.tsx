@@ -44,6 +44,7 @@ const Business: React.FC<BusinessProps> = (props) => {
     })
       .then((response) => response.json())
       .then((data) => console.log(data));
+    setIsSaved(true);
   };
 
   const deleteHandler = (event: React.FormEvent) => {
@@ -60,6 +61,7 @@ const Business: React.FC<BusinessProps> = (props) => {
     })
       .then((response) => response.json())
       .then((data) => console.log(data));
+    setIsSaved(false);
   };
 
   return (
@@ -73,7 +75,7 @@ const Business: React.FC<BusinessProps> = (props) => {
       {isLanding && !isSaved && auth.isLoggedIn && (
         <button onClick={submitHandler}>Add Business to Dashboard</button>
       )}
-      {isDashboard && (
+      {isDashboard && isSaved && (
         <button onClick={deleteHandler}>Delete Business From Dashboard</button>
       )}
     </li>
