@@ -7,15 +7,15 @@ import Comments from "../../shared/components/comments/Comments";
 
 interface Business {
   cardData: {
-    key: string;
+    // key: string;
     businessId: string;
     name: string;
     image: string;
     rating: number;
-    location: {
-      lat: number;
-      lng: number;
-    };
+    // location: {
+    //   lat: number;
+    //   lng: number;
+    // };
     comments: {
       userId: string;
       comment: string;

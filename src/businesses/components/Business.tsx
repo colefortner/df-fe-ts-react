@@ -69,7 +69,18 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   return (
     <li>
-      <Link to={`/${props.businessId}/businesses`} state={{ cardData: props }}>
+      <Link
+        to={`/${props.businessId}/businesses`}
+        state={{
+          cardData: {
+            // key: props.key,
+            businessId: props.businessId,
+            name: props.name,
+            image: props.image,
+            rating: props.rating,
+          },
+        }}
+      >
         <h2>Business Number: {props.businessId}</h2>
         <h2>{props.name}</h2>
         <img src={props.image} alt={props.name} style={{ width: 200 }} />
