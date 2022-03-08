@@ -25,13 +25,19 @@ const Comments: React.FC<CommentsProps> = (props) => {
     commentId: string,
     userId: string,
     comment: string,
-    rating: number
+    rating: number,
+    avatar: string | null,
+    username: string | null,
+    commentDate: Date
   ) => {
     let something = {
       commentId,
       userId,
       comment,
       rating,
+      avatar,
+      username,
+      commentDate,
     };
     setCommentsData([...commentsData, something]);
   };
@@ -47,6 +53,8 @@ const Comments: React.FC<CommentsProps> = (props) => {
   const hasCommented = commentsData.some(
     (comment) => comment.userId === auth.userId
   );
+
+  console.log(commentsData);
 
   return (
     <>

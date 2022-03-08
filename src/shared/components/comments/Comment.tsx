@@ -8,13 +8,19 @@ interface CommentProps {
   key: string;
   id: string;
   commentUserId: string;
+  userAvatar: string;
+  username: string;
   review: string;
   businessId: string | undefined;
+  commentDate: Date;
   addComment: (
     commentId: string,
     userId: string,
     comment: string,
-    review: number
+    review: number,
+    avatar: string | null,
+    username: string | null,
+    commentDate: Date
   ) => void;
   deleteComment: (id: string) => void;
 }
@@ -40,6 +46,8 @@ const Comment: React.FC<CommentProps> = (props) => {
     setIsEditing(!isEditing);
   };
 
+  const commie = props.commentDate;
+
   return (
     <li>
       {isEditing === true ? (
@@ -56,9 +64,19 @@ const Comment: React.FC<CommentProps> = (props) => {
           <button onClick={editModeHandler}>Cancel edit</button>
         </>
       ) : (
-        <h2>
-          Comment Number: {props.id} Comment: {props.review}
-        </h2>
+        <>
+          <h2>{props.username}</h2>
+          <p>{new Date(props.commentDate).toLocaleDateString()}</p>
+          <img
+            src={`http://localhost:5050/${props.userAvatar}`}
+            // src="https://www.industrialempathy.com/img/remote/ZiClJf-640w.avif"
+            alt="User"
+            style={{ width: 75, height: 75, borderRadius: "100px" }}
+          />
+          <h2>
+            Comment Number: {props.id} Comment: {props.review}
+          </h2>
+        </>
       )}
       {auth.userId === props.commentUserId && !isEditing && (
         <>

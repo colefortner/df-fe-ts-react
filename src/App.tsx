@@ -8,19 +8,32 @@ import NavLinks from "./shared/components/navigation/NavLinks";
 import { AuthContext } from "./shared/context/auth-context";
 import Auth from "./users/pages/Auth";
 import "./App.css";
+import { stringify } from "querystring";
 
 const App: React.FC = () => {
   const [token, setToken] = useState<null | string>(null);
   const [userId, setUserId] = useState<null | string>(null);
+  const [avatar, setAvatar] = useState<null | string>(null);
+  const [username, setUsername] = useState<null | string>(null);
 
-  const login = useCallback((uid: string, token: string) => {
-    setToken(token);
-    setUserId(uid);
-    localStorage.setItem(
-      "userData",
-      JSON.stringify({ userId: uid, token: token })
-    );
-  }, []);
+  const login = useCallback(
+    (uid: string, token: string, avatar: string, username: string) => {
+      setToken(token);
+      setUserId(uid);
+      setAvatar(avatar);
+      setUsername(username);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          userId: uid,
+          token: token,
+          avatar: avatar,
+          username: username,
+        })
+      );
+    },
+    []
+  );
 
   const logout = useCallback(() => {
     setToken(null);
@@ -40,7 +53,12 @@ const App: React.FC = () => {
       storedData = JSON.parse(value);
     }
     if (storedData && storedData.token) {
-      login(storedData.userId, storedData.token);
+      login(
+        storedData.userId,
+        storedData.token,
+        storedData.avatar,
+        storedData.username
+      );
     }
   }, [login]);
 
@@ -50,6 +68,8 @@ const App: React.FC = () => {
         isLoggedIn: !!token,
         token: token,
         userId: userId,
+        avatar: avatar,
+        username: username,
         login: login,
         logout: logout,
       }}

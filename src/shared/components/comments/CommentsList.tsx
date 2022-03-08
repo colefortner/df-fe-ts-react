@@ -8,15 +8,21 @@ interface CommentsListProps {
     commentId: string,
     userId: string,
     comment: string,
-    rating: number
+    rating: number,
+    avatar: string | null,
+    username: string | null,
+    commentDate: Date
   ) => void;
   deleteComment: (id: string) => void;
 
   comments: {
     _id: string;
     userId: string;
+    avatar: string;
+    username: string;
     comment: string;
     rating: number;
+    commentDate: Date;
   }[];
 }
 
@@ -35,6 +41,9 @@ const CommentList: React.FC<CommentsListProps> = (props) => {
             id={comment._id}
             businessId={props.businessId}
             commentUserId={comment.userId}
+            userAvatar={comment.avatar}
+            username={comment.username}
+            commentDate={comment.commentDate}
             addComment={props.addComment}
             deleteComment={props.deleteComment}
           />

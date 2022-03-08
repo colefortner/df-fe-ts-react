@@ -69,7 +69,7 @@ const Auth: React.FC = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          auth.login(data.userId, data.token);
+          auth.login(data.userId, data.token, data.userImage, data.username);
         });
 
       navigate("/");
@@ -90,7 +90,7 @@ const Auth: React.FC = () => {
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
-            auth.login(data.userId, data.token);
+            auth.login(data.userId, data.token, data.userImage, data.username);
           });
       }
       navigate("/");

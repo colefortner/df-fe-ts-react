@@ -12,7 +12,10 @@ interface CommentFormProps {
     commentId: string,
     userId: string,
     comment: string,
-    review: number
+    review: number,
+    avatar: string | null,
+    username: string | null,
+    commentDate: Date
   ) => void;
   deleteComment: (id: string) => void;
 }
@@ -48,7 +51,15 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
         console.log(data);
       });
     if (review && auth.userId) {
-      props.addComment(props.commentId, auth.userId, comment, review);
+      props.addComment(
+        props.commentId,
+        auth.userId,
+        comment,
+        review,
+        auth.avatar,
+        auth.username,
+        new Date()
+      );
     }
   };
 

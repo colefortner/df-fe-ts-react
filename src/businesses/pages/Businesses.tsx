@@ -10,7 +10,7 @@ const Businesses: React.FC = () => {
       .then((res) => res.json())
       .then((data) => {
         setBusinessesData(data.businesses);
-        console.log(data.businesses[1].users);
+        console.log(data.businesses);
       });
   }, []);
 
