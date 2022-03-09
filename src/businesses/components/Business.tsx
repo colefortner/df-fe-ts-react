@@ -103,7 +103,17 @@ const Business: React.FC<BusinessProps> = (props) => {
         }}
       >
         <h2>Business Number: {props.businessId}</h2>
-        <h2 style={{ color: theme.colors.brand.primary }}>{props.name}</h2>
+        <h2
+          style={{
+            color: theme.colors.brand.primary,
+            fontFamily: theme.fonts.fancy,
+            fontSize: theme.fontSizes.h1,
+            fontWeight: 100,
+            fontStyle: "italic",
+          }}
+        >
+          {props.name}
+        </h2>
         <img src={props.image} alt={props.name} style={{ width: 200 }} />
         <Rating rating={props.rating} />
       </Link>
