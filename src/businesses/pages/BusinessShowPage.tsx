@@ -11,6 +11,20 @@ interface Business {
     businessId: string;
     name: string;
     image: string;
+    address: {
+      street: string;
+      city: string;
+      state: string;
+      zip: number;
+    };
+    website: string;
+    phone: string;
+    hours: {
+      day: string;
+      open: string;
+      close: string;
+    }[];
+
     rating: number;
     // location: {
     //   lat: number;
@@ -29,11 +43,31 @@ const BusinessShowPage: React.FC = () => {
   const state = location.state as Business;
   const { cardData } = state;
 
+  console.log(cardData.website);
+
   return (
     <>
       <p>{params.businessId}</p>
       <p>{cardData.name}</p>
       <img src={cardData.image} alt={cardData.name} style={{ width: 200 }} />
+      <a href={`https://www.${cardData.website}`}>{cardData.website}</a>
+      <div>{cardData.phone}</div>
+
+      <div>
+        <div>
+          <h2>Hours</h2>
+          {cardData.hours.map((hour) => (
+            <p>
+              {hour.day} {hour.open} - {hour.close}
+            </p>
+          ))}
+        </div>
+        <p>{cardData.address.street}</p>
+        <p>
+          {cardData.address.city}, {cardData.address.state}{" "}
+          {cardData.address.zip}
+        </p>
+      </div>
       <Rating rating={cardData.rating} />
       <Comments businessId={cardData.businessId} />
       {/* <RatingForm /> */}

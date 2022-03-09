@@ -14,6 +14,19 @@ interface BusinessProps {
   name: string;
   image: string;
   rating: number;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zip: number;
+  };
+  website: string;
+  phone: string;
+  hours: {
+    day: string;
+    open: string;
+    close: string;
+  }[];
   location: {
     lat: number;
     lng: number;
@@ -78,6 +91,10 @@ const Business: React.FC<BusinessProps> = (props) => {
             name: props.name,
             image: props.image,
             rating: props.rating,
+            address: props.address,
+            website: props.website,
+            phone: props.phone,
+            hours: props.hours,
           },
         }}
       >
