@@ -9,6 +9,8 @@ import { AuthContext } from "./shared/context/auth-context";
 import Auth from "./users/pages/Auth";
 import "./App.css";
 import { stringify } from "querystring";
+import { ThemeContext } from "styled-components";
+import { theme } from "./shared/components/theme/index";
 
 const App: React.FC = () => {
   const [token, setToken] = useState<null | string>(null);
@@ -63,28 +65,33 @@ const App: React.FC = () => {
   }, [login]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn: !!token,
-        token: token,
-        userId: userId,
-        avatar: avatar,
-        username: username,
-        login: login,
-        logout: logout,
-      }}
-    >
-      <BrowserRouter>
-        <NavLinks />
-        <Routes>
-          <Route path="businesses" element={<Businesses />} />
-          <Route path=":businessId/businesses" element={<BusinessShowPage />} />
-          <Route path="users" element={<UserDashboard />} />
-          <Route path="auth" element={<Auth />} />
-          <Route path="*" element={<Navigate to="/users" />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthContext.Provider>
+    <ThemeContext.Provider value={theme}>
+      <AuthContext.Provider
+        value={{
+          isLoggedIn: !!token,
+          token: token,
+          userId: userId,
+          avatar: avatar,
+          username: username,
+          login: login,
+          logout: logout,
+        }}
+      >
+        <BrowserRouter>
+          <NavLinks />
+          <Routes>
+            <Route path="businesses" element={<Businesses />} />
+            <Route
+              path=":businessId/businesses"
+              element={<BusinessShowPage />}
+            />
+            <Route path="users" element={<UserDashboard />} />
+            <Route path="auth" element={<Auth />} />
+            <Route path="*" element={<Navigate to="/users" />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 

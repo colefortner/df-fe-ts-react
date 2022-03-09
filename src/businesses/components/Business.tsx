@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import { AuthContext } from "../../shared/context/auth-context";
+import { ThemeContext } from "../../shared/context/theme-context";
 
 interface BusinessProps {
   removeBusinessFromDashboard: (id: string) => void;
@@ -35,9 +36,12 @@ interface BusinessProps {
 
 const Business: React.FC<BusinessProps> = (props) => {
   const auth = useContext(AuthContext);
+  const theme = useContext(ThemeContext);
   const [isDashboard, setIsDashboard] = useState<Boolean>();
   const [isLanding, setIsLanding] = useState<Boolean>();
   const [isSaved, setIsSaved] = useState<Boolean>();
+
+  console.log("Theme", theme);
 
   useEffect(() => {
     setIsDashboard(props.dashboard);
@@ -99,7 +103,7 @@ const Business: React.FC<BusinessProps> = (props) => {
         }}
       >
         <h2>Business Number: {props.businessId}</h2>
-        <h2>{props.name}</h2>
+        <h2 style={{ color: theme.colors.brand.primary }}>{props.name}</h2>
         <img src={props.image} alt={props.name} style={{ width: 200 }} />
         <Rating rating={props.rating} />
       </Link>
