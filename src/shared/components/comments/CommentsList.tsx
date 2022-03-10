@@ -13,6 +13,11 @@ interface CommentsListProps {
     username: string | null,
     commentDate: Date
   ) => void;
+  editComment: (
+    commentId: string,
+    comment: string,
+    rating: number | undefined
+  ) => void;
   deleteComment: (id: string) => void;
 
   comments: {
@@ -45,6 +50,7 @@ const CommentList: React.FC<CommentsListProps> = (props) => {
             username={comment.username}
             commentDate={comment.commentDate}
             addComment={props.addComment}
+            editComment={props.editComment}
             deleteComment={props.deleteComment}
           />
         </>

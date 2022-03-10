@@ -42,6 +42,29 @@ const Comments: React.FC<CommentsProps> = (props) => {
     setCommentsData([...commentsData, something]);
   };
 
+  const editComment = (
+    commentId: string,
+    commentedit: string,
+    review: number | undefined
+  ) => {
+    setCommentsData((prevState) => {
+      const comments = prevState.map((comment) => {
+        console.log(comment._id);
+        if (comment._id === commentId) {
+          console.log(comment);
+          return {
+            ...comment,
+            comment: commentedit,
+            rating: review,
+          };
+        } else {
+          return comment;
+        }
+      });
+      return comments;
+    });
+  };
+
   const deleteComment = (commentId: string) => {
     console.log("COMMENTIS", commentId);
     setCommentsData((prevState) => {
@@ -62,6 +85,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
         businessId={props.businessId}
         comments={commentsData}
         addComment={addComment}
+        editComment={editComment}
         deleteComment={deleteComment}
       />
       {hasCommented === false && auth.isLoggedIn && (
@@ -72,6 +96,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
           isEditing={null}
           doneEditing={() => {}}
           addComment={addComment}
+          editComment={editComment}
           deleteComment={deleteComment}
         />
       )}

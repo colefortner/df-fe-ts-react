@@ -17,6 +17,11 @@ interface CommentFormProps {
     username: string | null,
     commentDate: Date
   ) => void;
+  editComment: (
+    commentId: string,
+    comment: string,
+    review: number | undefined
+  ) => void;
   deleteComment: (id: string) => void;
 }
 
@@ -81,6 +86,7 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
       .then((res) => res.json())
       .then((data) => console.log(data));
     props.doneEditing(false);
+    props.editComment(props.commentId, comment, review);
   };
 
   return (

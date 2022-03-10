@@ -22,6 +22,11 @@ interface CommentProps {
     username: string | null,
     commentDate: Date
   ) => void;
+  editComment: (
+    commentId: string,
+    comment: string,
+    review: number | undefined
+  ) => void;
   deleteComment: (id: string) => void;
 }
 
@@ -59,6 +64,7 @@ const Comment: React.FC<CommentProps> = (props) => {
             isEditing={isEditing}
             doneEditing={doneEditing}
             addComment={props.addComment}
+            editComment={props.editComment}
             deleteComment={props.deleteComment}
           />
           <button onClick={editModeHandler}>Cancel edit</button>
