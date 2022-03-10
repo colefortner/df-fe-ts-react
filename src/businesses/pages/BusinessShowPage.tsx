@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import Comments from "../../shared/components/comments/Comments";
@@ -43,7 +43,14 @@ const BusinessShowPage: React.FC = () => {
   const state = location.state as Business;
   const { cardData } = state;
 
+  const [avgRating, setAvgRating] = useState(cardData.rating);
+  const [length, setLength] = useState<number | undefined>();
   console.log(cardData.website);
+
+  const getRatingUpdates = (avg: number, length: number) => {
+    setAvgRating(avg);
+    setLength(length);
+  };
 
   return (
     <>
@@ -68,8 +75,14 @@ const BusinessShowPage: React.FC = () => {
           {cardData.address.zip}
         </p>
       </div>
-      <Rating rating={cardData.rating} />
-      <Comments businessId={cardData.businessId} />
+      <Rating rating={avgRating} />
+      <p>
+        {avgRating} out of {length} reviews
+      </p>
+      <Comments
+        businessId={cardData.businessId}
+        getRatingUpdate={getRatingUpdates}
+      />
       {/* <RatingForm /> */}
       {/* <div style={{ width: "400px", height: "400px" }}>
         <Map center={cardData.location} zoom={10} />

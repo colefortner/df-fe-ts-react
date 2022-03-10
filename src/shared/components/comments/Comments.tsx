@@ -6,11 +6,22 @@ import CommentForm from "./ComentForm";
 
 interface CommentsProps {
   businessId: string | undefined;
+  getRatingUpdate: (avg: number, length: number) => void;
 }
 
 const Comments: React.FC<CommentsProps> = (props) => {
   const auth = useContext(AuthContext);
   const [commentsData, setCommentsData] = useState<any[]>([]);
+
+  const ratingsLength = commentsData.length;
+  const ratingsSum = commentsData.reduce(
+    (result, comment) => result + comment.rating,
+    0
+  );
+
+  const ratingAvg = ratingsSum / ratingsLength;
+
+  props.getRatingUpdate(ratingAvg, ratingsLength);
 
   useEffect(() => {
     fetch(`http://localhost:5050/comments/${props.businessId}`)
