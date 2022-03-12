@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import Comments from "../../shared/components/comments/Comments";
+import Promotions from "../../shared/components/promotions/Promotions";
 // import RatingForm from "../../shared/components/comments/RatingForm";
 // import Map from "../../shared/components/UIElements/Maps/Map";
 
@@ -87,6 +88,7 @@ const BusinessShowPage: React.FC = () => {
       {/* <div style={{ width: "400px", height: "400px" }}>
         <Map center={cardData.location} zoom={10} />
       </div> */}
+      <Promotions businessId={params.businessId} />
     </>
   );
 };
