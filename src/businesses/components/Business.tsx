@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import { AuthContext } from "../../shared/context/auth-context";
 import { ThemeContext } from "../../shared/context/theme-context";
+import styled from "styled-components";
 
 interface BusinessProps {
   removeBusinessFromDashboard: (id: string) => void;
@@ -33,6 +34,37 @@ interface BusinessProps {
     lng: number;
   };
 }
+
+const BusinessCard = styled.div`
+  border: 2px solid black;
+  border-radius: 6px;
+  padding: 10px;
+  height: 400px;
+  width: 275px;
+  margin: 20px;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: ${(props) => props.theme.fontWeights.medium};
+  color: ${(props) => props.theme.colors.brand.primary};
+`;
+
+const BusinessCardLink = styled(Link)`
+  text-decoration: none;
+  font-size: ${(props) => props.theme.fontSizes.body};
+  color: inherit;
+  font-family: ${(props) => props.theme.fonts.body};
+`;
+
+const Image = styled.img`
+  height: 200px;
+  border-radius: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+`;
+
+const RatingContainer = styled.div``;
 
 const Business: React.FC<BusinessProps> = (props) => {
   const auth = useContext(AuthContext);
@@ -85,9 +117,10 @@ const Business: React.FC<BusinessProps> = (props) => {
   };
 
   return (
-    <li>
-      <Link
+    <BusinessCard>
+      <BusinessCardLink
         to={`/${props.businessId}/businesses`}
+        // style={{ textDecoration: "none" }}
         state={{
           cardData: {
             // key: props.key,
@@ -102,28 +135,20 @@ const Business: React.FC<BusinessProps> = (props) => {
           },
         }}
       >
-        <h2>Business Number: {props.businessId}</h2>
-        <h2
-          style={{
-            color: theme.colors.brand.primary,
-            fontFamily: theme.fonts.fancy,
-            fontSize: theme.fontSizes.h1,
-            fontWeight: 100,
-            fontStyle: "italic",
-          }}
-        >
-          {props.name}
-        </h2>
-        <img src={props.image} alt={props.name} style={{ width: 200 }} />
-        <Rating rating={props.rating} />
-      </Link>
+        {/* <h2>Business Number: {props.businessId}</h2> */}
+        <h2>{props.name}</h2>
+        <Image src={props.image} alt={props.name} style={{ width: 200 }} />
+        <RatingContainer>
+          <Rating rating={props.rating} />
+        </RatingContainer>
+      </BusinessCardLink>
       {isLanding && !isSaved && auth.isLoggedIn && (
         <button onClick={submitHandler}>Add Business to Dashboard</button>
       )}
       {isDashboard && isSaved && (
         <button onClick={deleteHandler}>Delete Business From Dashboard</button>
       )}
-    </li>
+    </BusinessCard>
   );
 };
 

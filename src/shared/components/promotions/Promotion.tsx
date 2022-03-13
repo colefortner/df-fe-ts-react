@@ -15,7 +15,7 @@ const Promotion: React.FC<PromotionProps> = (props) => {
   return (
     <li>
       <p>{props.eventDate}</p>
-      <img src={props.eventLink} alt="event" style={{ width: 200 }} />
+      <img src={props.eventLink} alt="event" style={{ width: 400 }} />
     </li>
   );
 };

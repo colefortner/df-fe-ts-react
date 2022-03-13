@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import Business from "./Business";
-
+import styled from "styled-components";
 interface BusinessListProps {
   dashboard: boolean;
   landing: boolean;
@@ -33,6 +33,14 @@ interface BusinessListProps {
   }[];
 }
 
+const BusinessCardsContainer = styled.div`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+`;
+
 const BusinessList: React.FC<BusinessListProps> = (props) => {
   const auth = useContext(AuthContext);
 
@@ -40,7 +48,7 @@ const BusinessList: React.FC<BusinessListProps> = (props) => {
     return <h2>No businesses found</h2>;
   }
   return (
-    <ul>
+    <BusinessCardsContainer>
       {props.businesses.map((business) => (
         <Business
           key={business._id}
@@ -59,7 +67,7 @@ const BusinessList: React.FC<BusinessListProps> = (props) => {
           removeBusinessFromDashboard={props.removeBusinessFromDashboard}
         />
       ))}
-    </ul>
+    </BusinessCardsContainer>
   );
 };
 
