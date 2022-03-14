@@ -25,6 +25,7 @@ interface BusinessListProps {
       open: string;
       close: string;
     }[];
+    type: [string];
     users: [string];
     location: {
       lat: number;
@@ -61,6 +62,7 @@ const BusinessList: React.FC<BusinessListProps> = (props) => {
           phone={business.phone}
           hours={business.hours}
           location={business.location}
+          type={business.type}
           dashboard={props.dashboard}
           landing={props.landing}
           saved={auth.userId ? business.users.includes(auth.userId) : false}

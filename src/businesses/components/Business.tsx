@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Rating from "../../shared/components/UIElements/Rating";
 import { AuthContext } from "../../shared/context/auth-context";
 import { ThemeContext } from "../../shared/context/theme-context";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import styled from "styled-components";
 
 interface BusinessProps {
@@ -22,6 +23,7 @@ interface BusinessProps {
     state: string;
     zip: number;
   };
+  type: [string];
   website: string;
   phone: string;
   hours: {
@@ -36,12 +38,13 @@ interface BusinessProps {
 }
 
 const BusinessCard = styled.div`
-  border: 2px solid black;
+  // border: 1px solid gray;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   border-radius: 6px;
   padding: 10px;
   height: 400px;
   width: 275px;
-  margin: 20px;
+  margin: 10px;
   justify-content: center;
   text-align: center;
   display: flex;
@@ -58,13 +61,57 @@ const BusinessCardLink = styled(Link)`
 `;
 
 const Image = styled.img`
-  height: 200px;
+  height: 225px;
+  width: 225px;
   border-radius: 10px;
   margin-top: 8px;
   margin-bottom: 8px;
 `;
 
-const RatingContainer = styled.div``;
+const Phone = styled.div`
+  margin-top: 5px;
+  color: #445663;
+`;
+
+const Open = styled.div`
+  margin-top: 5px;
+  color: green;
+`;
+
+const SaveButton = styled.button`
+  all: unset;
+  position: absolute;
+  font-size: 30px;
+  margin-top: 45px;
+  margin-left: 140px;
+  color: white;
+`;
+
+const DeleteButton = styled.button`
+  all: unset;
+  position: absolute;
+  font-size: 30px;
+  margin-top: 45px;
+  margin-left: 140px;
+  color: red;
+`;
+
+const RestaurantName = styled.h2`
+  color: #445663;
+`;
+
+const Type = styled.p`
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  color: #445663;
+`;
+
+const RatingContainer = styled.div`
+  // color: white;
+  color: #445663;
+`;
 
 const Business: React.FC<BusinessProps> = (props) => {
   const auth = useContext(AuthContext);
@@ -132,21 +179,38 @@ const Business: React.FC<BusinessProps> = (props) => {
             website: props.website,
             phone: props.phone,
             hours: props.hours,
+            type: props.type,
           },
         }}
       >
         {/* <h2>Business Number: {props.businessId}</h2> */}
-        <h2>{props.name}</h2>
-        <Image src={props.image} alt={props.name} style={{ width: 200 }} />
+        <Image src={props.image} alt={props.name} />
+        <RestaurantName>{props.name}</RestaurantName>
+
         <RatingContainer>
           <Rating rating={props.rating} />
         </RatingContainer>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {props.type.map((item) => (
+            <Type>{item}</Type>
+          ))}
+        </div>
+        <Phone>{props.phone}</Phone>
+        <Open>Open: {props.hours[0].open}</Open>
       </BusinessCardLink>
-      {isLanding && !isSaved && auth.isLoggedIn && (
-        <button onClick={submitHandler}>Add Business to Dashboard</button>
+
+      <br></br>
+      {/* <div>Happy Hour</div> */}
+      {/* <div>Outdoor dining Takeout Delivery</div> */}
+      {!isSaved && auth.isLoggedIn && (
+        <SaveButton onClick={submitHandler}>
+          <AiOutlineHeart />
+        </SaveButton>
       )}
-      {isDashboard && isSaved && (
-        <button onClick={deleteHandler}>Delete Business From Dashboard</button>
+      {isSaved && (
+        <DeleteButton onClick={deleteHandler}>
+          <AiFillHeart />
+        </DeleteButton>
       )}
     </BusinessCard>
   );
