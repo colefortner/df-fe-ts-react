@@ -103,8 +103,8 @@ const RestaurantName = styled.h2`
 const Type = styled.p`
   font-size: 12px;
   margin-top: 5px;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
   color: #445663;
 `;
 
@@ -120,7 +120,54 @@ const Business: React.FC<BusinessProps> = (props) => {
   const [isLanding, setIsLanding] = useState<Boolean>();
   const [isSaved, setIsSaved] = useState<Boolean>();
 
-  console.log("Theme", theme);
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  let newDay = new Date();
+  let dayName = newDay.getDay();
+  console.log(newDay);
+  console.log("DAY", daysOfWeek[dayName]);
+  let day = daysOfWeek[dayName];
+  // let hours = newDay.getHours();
+  // let minutes = newDay.getMinutes();
+  // console.log("hours", hours);
+  // console.log("minutes", minutes);
+
+  let openhours = 15;
+  let openminutes = 30;
+
+  let closehours = 22;
+  let closeminutes = 30;
+
+  // if (inhours > 12) {
+  //   console.log(inhours - 12);
+  // }
+  let hours = 15;
+  let minutes = 30;
+  const formatDate = (
+    hours: number,
+    minutes: number,
+    openhours: number,
+    openminutes: number,
+    closehours: number,
+    closeminutes: number
+  ) => {
+    let output;
+    console.log("hi", minutes > openminutes);
+    if (
+      (hours > openhours && hours < closehours) ||
+      (hours === openhours && minutes >= openminutes) ||
+      (hours === closehours && minutes < closeminutes)
+    ) {
+      output = "OPEN";
+    } else {
+      output = "CLOSED";
+    }
+    return output;
+  };
+
+  console.log(
+    formatDate(hours, minutes, openhours, openminutes, closehours, closeminutes)
+  );
+  // console.log("Theme", theme);
 
   useEffect(() => {
     setIsDashboard(props.dashboard);
@@ -196,7 +243,12 @@ const Business: React.FC<BusinessProps> = (props) => {
           ))}
         </div>
         <Phone>{props.phone}</Phone>
-        <Open>Open: {props.hours[0].open}</Open>
+        <Open>
+          {/* {hours > inhours ? "OPEN" : "CLOSED"}{" "}
+          {/* Open: {day} {props.hours[dayName].open} - {props.hours[dayName].close} */}
+          {/* {inhours > 12 ? inhours - 12 : inhours}:{inmin}{" "} */}
+          {/* {inhours >= 12 ? "PM" : "AM"} */}
+        </Open>
       </BusinessCardLink>
 
       <br></br>
