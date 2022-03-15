@@ -84,8 +84,8 @@ const SaveButton = styled.button`
   all: unset;
   position: absolute;
   font-size: 30px;
-  margin-top: 45px;
-  margin-left: 140px;
+  margin-top: 20px;
+  margin-left: 170px;
   color: white;
 `;
 
@@ -93,8 +93,8 @@ const DeleteButton = styled.button`
   all: unset;
   position: absolute;
   font-size: 30px;
-  margin-top: 45px;
-  margin-left: 140px;
+  margin-top: 20px;
+  margin-left: 170px;
   color: red;
 `;
 
