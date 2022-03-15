@@ -38,7 +38,7 @@ interface BusinessProps {
   };
 }
 
-const BusinessCard = styled.div`
+const BusinessCard = styled.li`
   // border: 1px solid gray;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   border-radius: 6px;

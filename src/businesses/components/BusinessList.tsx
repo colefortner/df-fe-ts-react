@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import Business from "./Business";
 import styled from "styled-components";
+
 interface BusinessListProps {
   dashboard: boolean;
   landing: boolean;
@@ -34,7 +35,7 @@ interface BusinessListProps {
   }[];
 }
 
-const BusinessCardsContainer = styled.div`
+const BusinessCardsContainer = styled.ul`
   justify-content: center;
   align-items: center;
   display: flex;
