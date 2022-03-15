@@ -2,7 +2,7 @@ import React from "react";
 import Promotion from "./Promotion";
 
 interface PromotionsListProps {
-  businessId: string | undefined;
+  // businessId: string | undefined;
   promotions: {
     _id: string;
     eventDate: string;

@@ -26,7 +26,7 @@ const Promotions: React.FC<PromotionsProps> = (props) => {
     <>
       <h1>Promotions</h1>
       <PromotionsList
-        businessId={props.businessId}
+        // businessId={props.businessId}
         promotions={promotionsData}
       />
     </>
