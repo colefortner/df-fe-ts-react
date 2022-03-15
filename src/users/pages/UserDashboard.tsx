@@ -22,7 +22,7 @@ const Users: React.FC = () => {
       .then((res) => res.json())
       .then((data) => {
         setBusinessData(data.businesses);
-        console.log(data.businesses);
+        // console.log(data.businesses);
       });
   }, []);
 

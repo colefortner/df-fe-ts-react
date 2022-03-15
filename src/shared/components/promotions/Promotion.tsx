@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 
 import { AuthContext } from "../../context/auth-context";
+import styled from "styled-components";
 
 interface PromotionProps {
   key: string;
@@ -9,14 +10,18 @@ interface PromotionProps {
   eventLink: string;
 }
 
+const PromotionCard = styled.li`
+  margin-top: 20px;
+`;
+
 const Promotion: React.FC<PromotionProps> = (props) => {
   const auth = useContext(AuthContext);
 
   return (
-    <li>
+    <PromotionCard>
       <p>{props.eventDate}</p>
       <img src={props.eventLink} alt="event" style={{ width: 400 }} />
-    </li>
+    </PromotionCard>
   );
 };
 
