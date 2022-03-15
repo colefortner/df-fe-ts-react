@@ -11,7 +11,12 @@ interface PromotionProps {
 }
 
 const PromotionCard = styled.li`
-  margin-top: 20px;
+  margin-top: 30px;
+`;
+
+const EventDate = styled.p`
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 const Promotion: React.FC<PromotionProps> = (props) => {
@@ -19,8 +24,9 @@ const Promotion: React.FC<PromotionProps> = (props) => {
 
   return (
     <PromotionCard>
-      <p>{props.eventDate}</p>
+      <EventDate>{props.eventDate}</EventDate>
       <img src={props.eventLink} alt="event" style={{ width: 400 }} />
+      <hr></hr>
     </PromotionCard>
   );
 };

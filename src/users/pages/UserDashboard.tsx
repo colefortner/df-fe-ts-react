@@ -9,6 +9,14 @@ const Title = styled.h1`
   text-align: center;
 `;
 
+const PromotionsContainer = styled.div`
+  list-style: none;
+  text-align: center;
+  height: 500px;
+  width: 425px;
+  overflow-y: auto;
+`;
+
 const Users: React.FC = () => {
   const [businessData, setBusinessData] = useState<any[]>([]);
   const [promotionsData, setPromotionsData] = useState<any[]>([]);
@@ -58,7 +66,9 @@ const Users: React.FC = () => {
         landing={false}
         removeBusinessFromDashboard={removeBusinessCardFromDashboard}
       />
-      <PromotionsList promotions={promotionsData} />
+      <PromotionsContainer>
+        <PromotionsList promotions={promotionsData} />
+      </PromotionsContainer>
       <h2>Friends Checked in ?</h2>
     </div>
   );
