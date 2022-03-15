@@ -3,7 +3,6 @@ import BusinessList from "../../businesses/components/BusinessList";
 import { AuthContext } from "../../shared/context/auth-context";
 import PromotionsList from "../../shared/components/promotions/PromotionsList";
 import styled from "styled-components";
-import { isTemplateTail } from "typescript";
 
 const Title = styled.h1`
   font-size: 50px;
@@ -23,9 +22,6 @@ const Users: React.FC = () => {
       .then((res) => res.json())
       .then((data) => {
         setBusinessData(data.businesses);
-        // let promotions = getPromotionsData(data.businesses);
-        // setPromotionsData(promotions);
-        // console.log("PROMO", promotins);
         console.log(data.businesses);
       });
   }, []);
@@ -41,17 +37,17 @@ const Users: React.FC = () => {
 
   const getPromotionsData = (data: any) => {
     let newArr: any = [];
-    // setPromotionsData(
+
     data.forEach((item: { promotions: any[] }) =>
       newArr.push(...item.promotions)
     );
+    setPromotionsData(newArr);
     return newArr;
-
-    // item.promotions.forEach((promotion: any) => {
-    // });
-    // })
-    // );
   };
+
+  useEffect(() => {
+    getPromotionsData(businessData);
+  }, [businessData]);
 
   return (
     <div>
@@ -62,7 +58,7 @@ const Users: React.FC = () => {
         landing={false}
         removeBusinessFromDashboard={removeBusinessCardFromDashboard}
       />
-      {/* <PromotionsList promotions={promotionsData} /> */}
+      <PromotionsList promotions={promotionsData} />
       <h2>Friends Checked in ?</h2>
     </div>
   );
