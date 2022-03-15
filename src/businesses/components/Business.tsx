@@ -5,6 +5,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { ThemeContext } from "../../shared/context/theme-context";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import styled from "styled-components";
+import { time } from "console";
 
 interface BusinessProps {
   removeBusinessFromDashboard: (id: string) => void;
@@ -75,7 +76,8 @@ const Phone = styled.div`
 
 const Open = styled.div`
   margin-top: 5px;
-  color: green;
+  // color: green;
+  color: #445663;
 `;
 
 const SaveButton = styled.button`
@@ -121,53 +123,62 @@ const Business: React.FC<BusinessProps> = (props) => {
   const [isSaved, setIsSaved] = useState<Boolean>();
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-  let newDay = new Date();
-  let dayName = newDay.getDay();
-  console.log(newDay);
-  console.log("DAY", daysOfWeek[dayName]);
-  let day = daysOfWeek[dayName];
-  // let hours = newDay.getHours();
-  // let minutes = newDay.getMinutes();
-  // console.log("hours", hours);
-  // console.log("minutes", minutes);
+  const newDay = new Date();
+  const dayName = newDay.getDay();
 
-  let openhours = 15;
-  let openminutes = 30;
+  const day = daysOfWeek[dayName];
+  const hours = newDay.getHours();
+  const minutes = newDay.getMinutes();
 
-  let closehours = 22;
-  let closeminutes = 30;
+  console.log(props.hours[dayName].open);
+  const openthrowaway = props.hours[dayName].open.split(":");
+  const closethrowaway = props.hours[dayName].close.split(":");
 
-  // if (inhours > 12) {
-  //   console.log(inhours - 12);
-  // }
-  let hours = 15;
-  let minutes = 30;
+  const [openhours, openminutes] = openthrowaway;
+  const [closehours, closeminutes] = closethrowaway;
+
   const formatDate = (
     hours: number,
     minutes: number,
-    openhours: number,
-    openminutes: number,
-    closehours: number,
-    closeminutes: number
+    openhours: string,
+    openminutes: string,
+    closehours: string,
+    closeminutes: string
   ) => {
     let output;
-    console.log("hi", minutes > openminutes);
+    const openHrsConverted = Number(openhours);
+    const openMinConverted = Number(openminutes);
+    const closeHrsConverted = Number(closehours);
+    const closeMinConverted = Number(closeminutes);
     if (
-      (hours > openhours && hours < closehours) ||
-      (hours === openhours && minutes >= openminutes) ||
-      (hours === closehours && minutes < closeminutes)
+      (hours > openHrsConverted && hours < closeHrsConverted) ||
+      (hours === openHrsConverted && minutes >= openMinConverted) ||
+      (hours === closeHrsConverted && minutes < closeMinConverted)
     ) {
-      output = "OPEN";
+      output = true;
     } else {
-      output = "CLOSED";
+      output = false;
     }
     return output;
   };
 
-  console.log(
-    formatDate(hours, minutes, openhours, openminutes, closehours, closeminutes)
+  const convertTime = (militaryHrs: string, militaryMin: string) => {
+    if (Number(militaryHrs) > 12) {
+      return `${Number(militaryHrs) - 12}:${militaryMin}PM`;
+    } else if (Number(militaryHrs) === 12) {
+      return `${militaryHrs}:${militaryMin}PM`;
+    }
+    return `${militaryHrs}:${militaryMin}AM`;
+  };
+
+  const isOpen = formatDate(
+    hours,
+    minutes,
+    openhours,
+    openminutes,
+    closehours,
+    closeminutes
   );
-  // console.log("Theme", theme);
 
   useEffect(() => {
     setIsDashboard(props.dashboard);
@@ -244,16 +255,19 @@ const Business: React.FC<BusinessProps> = (props) => {
         </div>
         <Phone>{props.phone}</Phone>
         <Open>
-          {/* {hours > inhours ? "OPEN" : "CLOSED"}{" "}
-          {/* Open: {day} {props.hours[dayName].open} - {props.hours[dayName].close} */}
-          {/* {inhours > 12 ? inhours - 12 : inhours}:{inmin}{" "} */}
-          {/* {inhours >= 12 ? "PM" : "AM"} */}
+          {isOpen && (
+            <p>
+              <span style={{ color: "green" }}>Open</span> until{" "}
+              {convertTime(closehours, closeminutes)}
+            </p>
+          )}
+          {!isOpen && (
+            <p>
+              <span style={{ color: "red" }}>Closed</span>
+            </p>
+          )}
         </Open>
       </BusinessCardLink>
-
-      <br></br>
-      {/* <div>Happy Hour</div> */}
-      {/* <div>Outdoor dining Takeout Delivery</div> */}
       {!isSaved && auth.isLoggedIn && (
         <SaveButton onClick={submitHandler}>
           <AiOutlineHeart />
