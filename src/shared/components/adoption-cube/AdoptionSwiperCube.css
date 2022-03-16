@@ -8,13 +8,10 @@
 } */
 
 .swiper {
-  width: 200px;
-  height: 200px;
-  /* position: absolute; */
-  /* left: 50%;
-  top: 50%;
-  margin-left: -150px;
-  margin-top: -150px; */
+  margin-top: 50px;
+  width: 150px;
+  height: 150px;
+  color: white;
 }
 
 .swiper-slide {
@@ -25,4 +22,15 @@
 .swiper-slide img {
   display: block;
   width: 100%;
+}
+
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: white;
+  opacity: 1;
+}
+
+/* target all bullets */
+.swiper-pagination-bullet {
+  /* background-color: red; */
+  opacity: 0.33;
 }
