@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import Business from "./Business";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 interface BusinessListProps {
   dashboard: boolean;
@@ -53,7 +54,7 @@ const BusinessList: React.FC<BusinessListProps> = (props) => {
     <BusinessCardsContainer>
       {props.businesses.map((business) => (
         <Business
-          key={business._id}
+          key={uuidv4()}
           businessId={business._id}
           name={business.name}
           image={business.image}

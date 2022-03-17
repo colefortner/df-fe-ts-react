@@ -1,6 +1,7 @@
 import React from "react";
 import Promotion from "./Promotion";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 // const PromotionsContainer = styled.ul`
 //   list-style: none;
@@ -27,14 +28,12 @@ const PromotionsList: React.FC<PromotionsListProps> = (props) => {
     // <PromotionsContainer>
     <ul>
       {props.promotions.map((promotion, index) => (
-        <>
-          <Promotion
-            key={promotion._id}
-            eventDate={promotion.eventDate}
-            id={promotion._id}
-            eventLink={promotion.eventLink}
-          />
-        </>
+        <Promotion
+          key={uuidv4()}
+          eventDate={promotion.eventDate}
+          id={promotion._id}
+          eventLink={promotion.eventLink}
+        />
       ))}
       {/* </PromotionsContainer> */}
     </ul>

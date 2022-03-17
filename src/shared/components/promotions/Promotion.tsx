@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/auth-context";
 import styled from "styled-components";
 
 interface PromotionProps {
-  key: string;
+  // key: string;
   id: string;
   eventDate: string;
   eventLink: string;

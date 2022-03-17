@@ -5,7 +5,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { ThemeContext } from "../../shared/context/theme-context";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import styled from "styled-components";
-import { time } from "console";
+import { v4 as uuidv4 } from "uuid";
 
 interface BusinessProps {
   removeBusinessFromDashboard: (id: string) => void;
@@ -13,7 +13,7 @@ interface BusinessProps {
   saved: boolean;
   dashboard: boolean;
   landing: boolean;
-  key: string;
+  // key: string;
   businessId: string;
   name: string;
   image: string;
@@ -250,7 +250,7 @@ const Business: React.FC<BusinessProps> = (props) => {
         </RatingContainer>
         <div style={{ display: "flex", justifyContent: "center" }}>
           {props.type.map((item) => (
-            <Type>{item}</Type>
+            <Type key={uuidv4()}>{item}</Type>
           ))}
         </div>
         <Phone>{props.phone}</Phone>
