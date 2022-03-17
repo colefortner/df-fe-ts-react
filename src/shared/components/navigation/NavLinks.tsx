@@ -2,6 +2,19 @@ import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth-context";
 import AdoptionSwiperCube from "../../components/adoption-cube/AdoptionSwiperCube";
+import styled from "styled-components";
+
+const LinkList = styled.ul`
+  display: flex;
+  list-style: none;
+  margin-top: 30px;
+  margin-left: 20px;
+  a {
+    text-decoration: none;
+    color: white;
+    margin: 10px;
+  }
+`;
 
 const NavLinks: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -9,7 +22,7 @@ const NavLinks: React.FC = () => {
   return (
     <>
       <AdoptionSwiperCube />
-      <ul>
+      <LinkList>
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
@@ -17,19 +30,17 @@ const NavLinks: React.FC = () => {
           <NavLink to="/businesses">All businesses</NavLink>
         </li>
         {auth.isLoggedIn && (
-          <li>
-            <NavLink to="/users">Dashboard</NavLink>
-          </li>
+          <li>{auth.isLoggedIn && <NavLink to="/users">Dashboard</NavLink>}</li>
         )}
         <li>
-          <NavLink to="/auth">Login/Signup</NavLink>
+          {!auth.isLoggedIn && <NavLink to="/auth">Login/Signup</NavLink>}
         </li>
         {auth.isLoggedIn && (
           <li>
             <button onClick={auth.logout}>Logout</button>
           </li>
         )}
-      </ul>
+      </LinkList>
     </>
   );
 };

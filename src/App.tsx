@@ -11,6 +11,7 @@ import "./App.css";
 import { stringify } from "querystring";
 import { ThemeContext } from "styled-components";
 import { theme } from "./shared/components/theme/index";
+import MainNavigation from "./shared/components/navigation/MainNavigation";
 
 const App: React.FC = () => {
   const [token, setToken] = useState<null | string>(null);
@@ -78,7 +79,7 @@ const App: React.FC = () => {
         }}
       >
         <BrowserRouter>
-          <NavLinks />
+          <MainNavigation />
           <Routes>
             <Route path="businesses" element={<Businesses />} />
             <Route

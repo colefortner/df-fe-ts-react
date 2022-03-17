@@ -95,7 +95,7 @@ const DeleteButton = styled.button`
   font-size: 30px;
   margin-top: 20px;
   margin-left: 170px;
-  color: red;
+  color: hsla(353, 100%, 62%, 1);
 `;
 
 const RestaurantName = styled.h2`
