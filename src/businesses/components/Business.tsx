@@ -130,7 +130,7 @@ const Business: React.FC<BusinessProps> = (props) => {
   const hours = newDay.getHours();
   const minutes = newDay.getMinutes();
 
-  console.log(props.hours[dayName].open);
+  // console.log(props.hours[dayName].open);
   const openthrowaway = props.hours[dayName].open.split(":");
   const closethrowaway = props.hours[dayName].close.split(":");
 

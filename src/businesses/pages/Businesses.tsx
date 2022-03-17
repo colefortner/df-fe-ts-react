@@ -22,7 +22,7 @@ const Businesses: React.FC = () => {
       .then((res) => res.json())
       .then((data) => {
         setBusinessesData(data.businesses);
-        console.log(data.businesses);
+        // console.log(data.businesses);
       });
   }, []);
 
@@ -47,7 +47,7 @@ const Businesses: React.FC = () => {
     getBarData(businessesData);
   }, [businessesData]);
 
-  console.log(barData);
+  // console.log(barData);
 
   return (
     <>

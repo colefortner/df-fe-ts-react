@@ -13,7 +13,7 @@ const Rating: React.FC<RatingProps> = (props) => {
     rating = (props.rating / 5) * 100;
   }
 
-  console.log(rating);
+  // console.log(rating);
 
   return (
     <span className={styles["paw-rating-wrapper"]}>

@@ -18,7 +18,7 @@ const LinkList = styled.ul`
 
 const NavLinks: React.FC = () => {
   const auth = useContext(AuthContext);
-  console.log(auth.isLoggedIn);
+  // console.log(auth.isLoggedIn);
   return (
     <>
       <AdoptionSwiperCube />
