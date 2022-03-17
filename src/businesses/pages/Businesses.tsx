@@ -7,6 +7,7 @@ import PromotionsList from "../../shared/components/promotions/PromotionsList";
 const Businesses: React.FC = () => {
   const [businessesData, setBusinessesData] = useState([]);
   const [promotionsData, setPromotionsData] = useState<any[]>([]);
+  const [barData, setBarData] = useState([]);
 
   const PromotionsContainer = styled.div`
     list-style: none;
@@ -35,9 +36,18 @@ const Businesses: React.FC = () => {
     return newArr;
   };
   // console.log(businessesData[1].);
+
+  const getBarData = (data: any) => {
+    let bar = data.filter((item: { type: any[] }) => item.type.includes("bar"));
+    setBarData(bar);
+  };
+
   useEffect(() => {
     getPromotionsData(businessesData);
+    getBarData(businessesData);
   }, [businessesData]);
+
+  console.log(barData);
 
   return (
     <>
