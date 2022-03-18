@@ -67,6 +67,8 @@ const Image = styled.img`
   border-radius: 10px;
   margin-top: 8px;
   margin-bottom: 8px;
+  // this keeps the picture from being distorted
+  object-fit: cover;
 `;
 
 const Phone = styled.div`
@@ -164,6 +166,9 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   const convertTime = (militaryHrs: string, militaryMin: string) => {
     if (Number(militaryHrs) > 12) {
+      if (Number(militaryHrs) <= 24) {
+        return `${Number(militaryHrs) - 12}:${militaryMin}AM`;
+      }
       return `${Number(militaryHrs) - 12}:${militaryMin}PM`;
     } else if (Number(militaryHrs) === 12) {
       return `${militaryHrs}:${militaryMin}PM`;
