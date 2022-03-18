@@ -9,6 +9,7 @@ const LinkList = styled.ul`
   list-style: none;
   margin-top: 30px;
   margin-left: 20px;
+  font-size: 30px;
   a {
     text-decoration: none;
     color: white;
@@ -16,29 +17,61 @@ const LinkList = styled.ul`
   }
 `;
 
+const ListItem = styled.li`
+  color: #fff;
+  // background: #333;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 20px;
+  margin-left: 4%;
+  font-size: 25px;
+  cursor: pointer;
+  margin-top: 40px;
+  transition: ease-in-out 0.1s;
+  border: 1px solid #fff;
+  float: right;
+  height: 75px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+
+    // background: #fff;
+    color: #000;
+    border: 1px solid #fff;
+  }
+`;
+
+const Button = styled.button`
+  all: unset;
+`;
+
 const NavLinks: React.FC = () => {
   const auth = useContext(AuthContext);
   // console.log(auth.isLoggedIn);
   return (
     <>
-      <AdoptionSwiperCube />
+      {/* <AdoptionSwiperCube /> */}
       <LinkList>
-        <li>
+        <ListItem>
           <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
+        </ListItem>
+        {/* <li>
           <NavLink to="/businesses">All businesses</NavLink>
-        </li>
+        </li> */}
         {auth.isLoggedIn && (
-          <li>{auth.isLoggedIn && <NavLink to="/users">Dashboard</NavLink>}</li>
+          <ListItem>
+            {auth.isLoggedIn && <NavLink to="/users">Dashboard</NavLink>}
+          </ListItem>
         )}
-        <li>
-          {!auth.isLoggedIn && <NavLink to="/auth">Login/Signup</NavLink>}
-        </li>
+        {!auth.isLoggedIn && (
+          <ListItem>
+            <NavLink to="/auth">Login/Signup</NavLink>
+          </ListItem>
+        )}
         {auth.isLoggedIn && (
-          <li>
-            <button onClick={auth.logout}>Logout</button>
-          </li>
+          <ListItem>
+            <Button onClick={auth.logout}>Logout</Button>
+          </ListItem>
         )}
       </LinkList>
     </>

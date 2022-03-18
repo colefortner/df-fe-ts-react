@@ -81,14 +81,14 @@ const App: React.FC = () => {
         <BrowserRouter>
           <MainNavigation />
           <Routes>
-            <Route path="businesses" element={<Businesses />} />
+            <Route path="/" element={<Businesses />} />
             <Route
               path=":businessId/businesses"
               element={<BusinessShowPage />}
             />
             <Route path="users" element={<UserDashboard />} />
             <Route path="auth" element={<Auth />} />
-            <Route path="*" element={<Navigate to="/users" />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
