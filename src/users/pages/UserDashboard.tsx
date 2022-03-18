@@ -20,19 +20,22 @@ const PromotionsContainer = styled.div`
 const Users: React.FC = () => {
   const [businessData, setBusinessData] = useState<any[]>([]);
   const [promotionsData, setPromotionsData] = useState<any[]>([]);
+  const [username, setUsername] = useState<any>("");
   const auth = useContext(AuthContext);
   console.log(auth.userId);
 
-  const username = auth.username![0].toUpperCase() + auth.username!.slice(1);
+  // const username = auth.username![0].toUpperCase() + auth.username!.slice(1);
 
   useEffect(() => {
     fetch(`http://localhost:5050/dashboard/${auth.userId}`)
       .then((res) => res.json())
       .then((data) => {
         setBusinessData(data.businesses);
+        setUsername(auth.username);
+        getPromotionsData(data.businesses);
         // console.log(data.businesses);
       });
-  }, []);
+  }, [auth]);
 
   const removeBusinessCardFromDashboard = (businessId: string) => {
     setBusinessData((prevState) => {
@@ -43,19 +46,19 @@ const Users: React.FC = () => {
     });
   };
 
-  const getPromotionsData = (data: any) => {
+  useEffect(() => {
+    getPromotionsData(businessData);
+  }, [businessData]);
+
+  const getPromotionsData = async (data: any) => {
     let newArr: any = [];
 
-    data.forEach((item: { promotions: any[] }) =>
+    await data.forEach((item: { promotions: any[] }) =>
       newArr.push(...item.promotions)
     );
     setPromotionsData(newArr);
     return newArr;
   };
-
-  useEffect(() => {
-    getPromotionsData(businessData);
-  }, [businessData]);
 
   return (
     <div>
