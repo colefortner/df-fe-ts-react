@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth-context";
 import AdoptionSwiperCube from "../../components/adoption-cube/AdoptionSwiperCube";
@@ -47,18 +47,26 @@ const Button = styled.button`
 
 const NavLinks: React.FC = () => {
   const auth = useContext(AuthContext);
+  const location = useLocation();
   // console.log(auth.isLoggedIn);
+
+  const isCurrentURL = (url: string) => {
+    return location.pathname.toLowerCase() === url.toLowerCase();
+  };
+
   return (
     <>
       {/* <AdoptionSwiperCube /> */}
       <LinkList>
-        <ListItem>
-          <NavLink to="/">Home</NavLink>
-        </ListItem>
+        {!isCurrentURL("/") && (
+          <ListItem>
+            <NavLink to="/">Home</NavLink>
+          </ListItem>
+        )}
         {/* <li>
           <NavLink to="/businesses">All businesses</NavLink>
         </li> */}
-        {auth.isLoggedIn && (
+        {auth.isLoggedIn && !isCurrentURL("/users") && (
           <ListItem>
             {auth.isLoggedIn && <NavLink to="/users">Dashboard</NavLink>}
           </ListItem>
