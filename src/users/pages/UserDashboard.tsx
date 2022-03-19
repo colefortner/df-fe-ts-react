@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import BusinessList from "../../businesses/components/BusinessList";
-import { AuthContext } from "../../shared/context/auth-context";
-import PromotionsList from "../../shared/components/promotions/PromotionsList";
 import styled from "styled-components";
+
+import { AuthContext } from "../../shared/context/auth-context";
+
+import BusinessList from "../../businesses/components/BusinessList";
+import PromotionsList from "../../shared/components/promotions/PromotionsList";
 
 const Title = styled.h1`
   font-size: 50px;
@@ -22,18 +24,17 @@ const Users: React.FC = () => {
   const [promotionsData, setPromotionsData] = useState<any[]>([]);
   const [username, setUsername] = useState<any>("");
   const auth = useContext(AuthContext);
-  console.log(auth.userId);
-
-  // const username = auth.username![0].toUpperCase() + auth.username!.slice(1);
 
   useEffect(() => {
     fetch(`http://localhost:5050/dashboard/${auth.userId}`)
       .then((res) => res.json())
       .then((data) => {
         setBusinessData(data.businesses);
-        setUsername(auth.username);
+        const username =
+          auth.username![0].toUpperCase() +
+          auth.username!.toLowerCase().slice(1);
+        setUsername(username);
         getPromotionsData(data.businesses);
-        // console.log(data.businesses);
       });
   }, [auth]);
 
