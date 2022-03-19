@@ -166,8 +166,11 @@ const Business: React.FC<BusinessProps> = (props) => {
 
   const convertTime = (militaryHrs: string, militaryMin: string) => {
     if (Number(militaryHrs) > 12) {
-      if (Number(militaryHrs) <= 24) {
+      if (Number(militaryHrs) === 24) {
         return `${Number(militaryHrs) - 12}:${militaryMin}AM`;
+      }
+      if (Number(militaryHrs) > 24) {
+        return `${Number(militaryHrs) - 24}:${militaryMin}AM`;
       }
       return `${Number(militaryHrs) - 12}:${militaryMin}PM`;
     } else if (Number(militaryHrs) === 12) {
