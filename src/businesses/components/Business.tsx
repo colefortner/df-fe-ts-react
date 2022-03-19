@@ -152,6 +152,9 @@ const Business: React.FC<BusinessProps> = (props) => {
     const openMinConverted = Number(openminutes);
     const closeHrsConverted = Number(closehours);
     const closeMinConverted = Number(closeminutes);
+    if (openhours === "closed") {
+      return false;
+    }
     if (
       (hours > openHrsConverted && hours < closeHrsConverted) ||
       (hours === openHrsConverted && minutes >= openMinConverted) ||
@@ -165,18 +168,21 @@ const Business: React.FC<BusinessProps> = (props) => {
   };
 
   const convertTime = (militaryHrs: string, militaryMin: string) => {
+    if (militaryHrs === "closed") {
+      return;
+    }
     if (Number(militaryHrs) > 12) {
       if (Number(militaryHrs) === 24) {
-        return `${Number(militaryHrs) - 12}:${militaryMin}AM`;
+        return `${Number(militaryHrs) - 12}:${militaryMin} AM`;
       }
       if (Number(militaryHrs) > 24) {
-        return `${Number(militaryHrs) - 24}:${militaryMin}AM`;
+        return `${Number(militaryHrs) - 24}:${militaryMin} AM`;
       }
-      return `${Number(militaryHrs) - 12}:${militaryMin}PM`;
+      return `${Number(militaryHrs) - 12}:${militaryMin} PM`;
     } else if (Number(militaryHrs) === 12) {
-      return `${militaryHrs}:${militaryMin}PM`;
+      return `${militaryHrs}:${militaryMin} PM`;
     }
-    return `${militaryHrs}:${militaryMin}AM`;
+    return `${militaryHrs}:${militaryMin} AM`;
   };
 
   const isOpen = formatDate(
