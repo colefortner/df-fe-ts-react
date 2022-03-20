@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { pawIcon } from "./images.js";
 
 interface MapProps {
   center: {
@@ -19,7 +20,11 @@ const Map: React.FC<MapProps> = (props) => {
       zoom: zoom,
     });
 
-    new window.google.maps.Marker({ position: center, map: map });
+    new window.google.maps.Marker({
+      position: center,
+      map: map,
+      icon: pawIcon,
+    });
   }, [center, zoom]);
 
   return (
