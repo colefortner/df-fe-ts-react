@@ -236,9 +236,13 @@ const BusinessShowPage: React.FC = (props) => {
             {hoursData.map((hour) => (
               <div style={{ display: "flex" }}>
                 <p style={{ width: "45px" }}>{hour[0]}</p>
-                <p>
-                  {hour[1]} - {hour[2]}
-                </p>
+                {hour[1] === "Closed" ? (
+                  <p>Closed</p>
+                ) : (
+                  <p>
+                    {hour[1]} - {hour[2]}
+                  </p>
+                )}
               </div>
             ))}
           </Hours>
@@ -274,6 +278,9 @@ const BusinessShowPage: React.FC = (props) => {
           </div>
         </PromotionsContainer>
       </CommentsPromotionsContainer>
+      <a href="https://www.flaticon.com/free-icons/paw" title="paw icons">
+        Paw icon used as google map marker created by deemakdaksina - Flaticon
+      </a>
     </>
   );
 };
