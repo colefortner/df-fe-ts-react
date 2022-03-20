@@ -36,10 +36,10 @@ const CommentList: React.FC<CommentsListProps> = (props) => {
     return <h2>No comments yet</h2>;
   }
   return (
-    <ul>
+    <ul style={{ listStyle: "none" }}>
       {props.comments.map((comment, index) => (
         <>
-          <Rating rating={comment.rating} />
+          {/* <Rating rating={comment.rating} /> */}
           <Comment
             key={comment._id}
             review={comment.comment}
@@ -52,6 +52,7 @@ const CommentList: React.FC<CommentsListProps> = (props) => {
             addComment={props.addComment}
             editComment={props.editComment}
             deleteComment={props.deleteComment}
+            rating={comment.rating}
           />
         </>
       ))}
