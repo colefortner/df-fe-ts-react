@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import styled from "styled-components";
+
+import { ThemeContext } from "../../shared/context/theme-context";
+
 import Rating from "../../shared/components/UIElements/Rating";
 import Comments from "../../shared/components/comments/Comments";
 import Promotions from "../../shared/components/promotions/Promotions";
 // import RatingForm from "../../shared/components/comments/RatingForm";
-// import Map from "../../shared/components/UIElements/Maps/Map";
+import Map from "../../shared/components/UIElements/Maps/Map";
 
 interface Business {
   cardData: {
@@ -27,22 +31,134 @@ interface Business {
     }[];
 
     rating: number;
-    // location: {
-    //   lat: number;
-    //   lng: number;
-    // };
+    location: {
+      lat: number;
+      lng: number;
+    };
     comments: {
       userId: string;
       comment: string;
     }[];
   };
 }
+const TopContainer = styled.div`
+  display: flex;
+`;
 
-const BusinessShowPage: React.FC = () => {
+const ContactHours = styled.div`
+  margin-left: ${(props) => props.theme.space[4]};
+`;
+
+const Title = styled.h1`
+  font-size: 30px;
+  // background: blue;
+  font-family: ${(props) => props.theme.fonts.body};
+  font-size: ${(props) => props.theme.fontSizes.h2};
+  margin-bottom: ${(props) => props.theme.space[3]};
+  margin-top: ${(props) => props.theme.space[3]};
+  margin-left: ${(props) => props.theme.space[5]};
+`;
+
+const WebAddress = styled.a`
+  color: inherit;
+  text-decoration: none;
+  font-size: 28px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: ${(props) => props.theme.space[3]};
+`;
+
+const Phone = styled.div`
+  font-size: 25px;
+  margin-top: ${(props) => props.theme.space[3]};
+  p {
+    margin-left: ${(props) => props.theme.space[3]};
+  }
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: ${(props) => props.theme.space[3]};
+  }
+`;
+
+const Address = styled.div`
+  font-size: 25px;
+  margin-bottom: ${(props) => props.theme.space[3]};
+
+  p {
+    margin-left: ${(props) => props.theme.space[3]};
+  }
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: ${(props) => props.theme.space[3]};
+  }
+`;
+
+const Hours = styled.div`
+  margin-top: ${(props) => props.theme.space[3]};
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: ${(props) => props.theme.space[3]};
+  }
+
+  p {
+    margin-left: ${(props) => props.theme.space[3]};
+    font-size: 25px;
+  }
+`;
+
+const MapContainer = styled.div`
+  width: 400px;
+  height: 330px;
+  margin-left: ${(props) => props.theme.space[4]};
+`;
+
+const Image = styled.img`
+  width: 500px;
+  border-radius: 10px;
+  margin-left: ${(props) => props.theme.space[5]};
+  diplay: inline-block;
+`;
+
+const CommentsPromotionsContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const CommentsContainer = styled.div`
+  margin-top: ${(props) => props.theme.space[4]};
+  margin-left: ${(props) => props.theme.space[5]};
+  width: 50%;
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: ${(props) => props.theme.space[3]};
+  }
+`;
+
+const CommentContainer = styled.div`
+  margin-left: ${(props) => props.theme.space[3]};
+`;
+
+const PromotionsContainer = styled.div`
+  margin-top: ${(props) => props.theme.space[4]};
+  margin-left: ${(props) => props.theme.space[5]};
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: ${(props) => props.theme.space[3]};
+  }
+`;
+
+const BusinessShowPage: React.FC = (props) => {
   const params = useParams();
   const location = useLocation();
   const state = location.state as Business;
   const { cardData } = state;
+
+  const theme = useContext(ThemeContext);
 
   const [avgRating, setAvgRating] = useState(cardData.rating);
   const [length, setLength] = useState<number | undefined>();
@@ -53,42 +169,111 @@ const BusinessShowPage: React.FC = () => {
     setLength(length);
   };
 
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  const newDay = new Date();
+  const dayName = newDay.getDay();
+
+  // const day = daysOfWeek[dayName];
+  // const hours = newDay.getHours();
+  // const minutes = newDay.getMinutes();
+
+  // console.log(props.hours[dayName].open);
+
+  const convertTime = (militaryHrs: string, militaryMin: string) => {
+    if (militaryHrs === "closed") {
+      return "Closed";
+    }
+    if (Number(militaryHrs) > 12) {
+      if (Number(militaryHrs) === 24) {
+        return `${Number(militaryHrs) - 12}:${militaryMin} AM`;
+      }
+      if (Number(militaryHrs) > 24) {
+        return `${Number(militaryHrs) - 24}:${militaryMin} AM`;
+      }
+      return `${Number(militaryHrs) - 12}:${militaryMin} PM`;
+    } else if (Number(militaryHrs) === 12) {
+      return `${militaryHrs}:${militaryMin} PM`;
+    }
+    return `${militaryHrs}:${militaryMin} AM`;
+  };
+  console.log(cardData.hours);
+
+  const hoursData = cardData.hours.map((hour) => {
+    const openthrowaway = hour.open.split(":");
+    const closethrowaway = hour.close.split(":");
+
+    const [openhours, openminutes] = openthrowaway;
+    const [closehours, closeminutes] = closethrowaway;
+
+    return [
+      hour.day,
+      convertTime(openhours, openminutes),
+      convertTime(closehours, closeminutes),
+    ];
+  });
+
   return (
     <>
-      <p>{params.businessId}</p>
-      <p>{cardData.name}</p>
-      <img src={cardData.image} alt={cardData.name} style={{ width: 200 }} />
-      <a href={`https://www.${cardData.website}`}>{cardData.website}</a>
-      <div>{cardData.phone}</div>
+      {/* <p>{params.businessId}</p> */}
+      <Title>{cardData.name}</Title>
+      <TopContainer>
+        <Image src={cardData.image} alt={cardData.name} />
+        <ContactHours>
+          <WebAddress href={`https://www.${cardData.website}`}>
+            {cardData.website}
+          </WebAddress>
+          <Rating rating={avgRating} />
+          <p>
+            {avgRating} out of {length} reviews
+          </p>
+          <Phone>
+            <h2>Phone</h2>
+            <p>{cardData.phone}</p>
+          </Phone>
 
-      <div>
-        <div>
-          <h2>Hours</h2>
-          {cardData.hours.map((hour) => (
+          <Hours>
+            <h2>Hours</h2>
+            {hoursData.map((hour) => (
+              <div style={{ display: "flex" }}>
+                <p style={{ width: "45px" }}>{hour[0]}</p>
+                <p>
+                  {hour[1]} - {hour[2]}
+                </p>
+              </div>
+            ))}
+          </Hours>
+        </ContactHours>
+        <MapContainer>
+          <Address>
+            <h2>Address</h2>
+
+            <p>{cardData.address.street}</p>
             <p>
-              {hour.day} {hour.open} - {hour.close}
+              {cardData.address.city}, {cardData.address.state}{" "}
+              {cardData.address.zip}
             </p>
-          ))}
-        </div>
-        <p>{cardData.address.street}</p>
-        <p>
-          {cardData.address.city}, {cardData.address.state}{" "}
-          {cardData.address.zip}
-        </p>
-      </div>
-      <Rating rating={avgRating} />
-      <p>
-        {avgRating} out of {length} reviews
-      </p>
-      <Comments
-        businessId={cardData.businessId}
-        getRatingUpdate={getRatingUpdates}
-      />
-      {/* <RatingForm /> */}
-      {/* <div style={{ width: "400px", height: "400px" }}>
-        <Map center={cardData.location} zoom={10} />
-      </div> */}
-      <Promotions businessId={params.businessId} />
+          </Address>
+          <Map center={cardData.location} zoom={15} />
+        </MapContainer>
+      </TopContainer>
+      <CommentsPromotionsContainer>
+        <CommentsContainer>
+          <h2>Reviews</h2>
+          <CommentContainer>
+            <Comments
+              businessId={cardData.businessId}
+              getRatingUpdate={getRatingUpdates}
+            />
+          </CommentContainer>
+        </CommentsContainer>
+        {/* <RatingForm /> */}
+        <PromotionsContainer>
+          <h2 style={{ fontSize: "25px" }}>Events/Promotions</h2>
+          <div style={{ marginLeft: "8px" }}>
+            <Promotions businessId={params.businessId} />
+          </div>
+        </PromotionsContainer>
+      </CommentsPromotionsContainer>
     </>
   );
 };
