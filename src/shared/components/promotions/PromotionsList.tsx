@@ -25,8 +25,7 @@ const PromotionsList: React.FC<PromotionsListProps> = (props) => {
     return <h2>No promotions yet</h2>;
   }
   return (
-    // <PromotionsContainer>
-    <ul>
+    <ul style={{ listStyle: "none" }}>
       {props.promotions.map((promotion, index) => (
         <Promotion
           key={uuidv4()}
@@ -35,7 +34,6 @@ const PromotionsList: React.FC<PromotionsListProps> = (props) => {
           eventLink={promotion.eventLink}
         />
       ))}
-      {/* </PromotionsContainer> */}
     </ul>
   );
 };
