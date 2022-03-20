@@ -252,6 +252,7 @@ const Business: React.FC<BusinessProps> = (props) => {
             phone: props.phone,
             hours: props.hours,
             type: props.type,
+            location: props.location,
           },
         }}
       >
