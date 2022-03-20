@@ -223,9 +223,13 @@ const BusinessShowPage: React.FC = (props) => {
             {cardData.website}
           </WebAddress>
           <Rating rating={avgRating} />
-          <p>
-            {avgRating} out of {length} reviews
-          </p>
+          {!length ? (
+            <p>No reviews yet</p>
+          ) : (
+            <p>
+              {avgRating} out of {length} reviews
+            </p>
+          )}
           <Phone>
             <h2>Phone</h2>
             <p>{cardData.phone}</p>
