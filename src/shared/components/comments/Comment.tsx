@@ -71,7 +71,7 @@ const Comment: React.FC<CommentProps> = (props) => {
   return (
     <div style={{ marginBottom: "30px" }}>
       {isEditing === true ? (
-        <>
+        <div style={{ marginLeft: "100px", display: "flex" }}>
           <CommentForm
             businessId={props.businessId}
             reviewComment={props.review}
@@ -81,10 +81,11 @@ const Comment: React.FC<CommentProps> = (props) => {
             addComment={props.addComment}
             editComment={props.editComment}
             deleteComment={props.deleteComment}
+            editModeHandler={editModeHandler}
           />
-          <button onClick={editModeHandler}>Cancel edit</button>
-        </>
+        </div>
       ) : (
+        // </div>
         <div>
           <div style={{ display: "flex" }}>
             <Avatar
@@ -110,7 +111,6 @@ const Comment: React.FC<CommentProps> = (props) => {
             }}
           >
             {props.review}
-            {/* Comment Number: {props.id} Comment: {props.review} */}
           </p>
         </div>
       )}

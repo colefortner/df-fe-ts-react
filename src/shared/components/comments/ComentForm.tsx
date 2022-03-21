@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { TiDelete, TiEdit, TiInputChecked } from "react-icons/ti";
+
 import { AuthContext } from "../../context/auth-context";
 import RatingForm from "./RatingForm";
 
@@ -8,6 +10,7 @@ interface CommentFormProps {
   commentId: string;
   isEditing: boolean | null;
   doneEditing: (value: boolean) => void;
+  editModeHandler: () => void;
   addComment: (
     commentId: string,
     userId: string,
@@ -91,24 +94,66 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
 
   return (
     <>
-      <form onSubmit={props.isEditing ? editHandler : submitHandler}>
-        <div>{comment}</div>
-        <div>
-          <label htmlFor="comment">Comment</label>
-          <input
-            type="text"
-            id="comment"
-            placeholder="comment"
-            name="comment"
-            onChange={changeHandler}
-            value={comment}
-          />
-        </div>
-        <RatingForm childCallback={childCallback} />
-        <button type="submit">
-          {props.isEditing ? "Submit Edit" : "Submit Comment"}
-        </button>
-      </form>
+      <div style={{ display: "flex", marginLeft: "-100px" }}>
+        <img
+          src={`http://localhost:5050/${auth.avatar}`}
+          // src="https://www.industrialempathy.com/img/remote/ZiClJf-640w.avif"
+          alt="User"
+          style={{ width: 75, height: 75, borderRadius: "100px" }}
+        />
+
+        <form onSubmit={props.isEditing ? editHandler : submitHandler}>
+          <div style={{ marginLeft: "20px", marginTop: "-10px" }}>
+            <p style={{ fontSize: "30px", fontWeight: "bold" }}>
+              {auth.username}
+            </p>
+            <RatingForm childCallback={childCallback} />
+          </div>
+          {/* <div>{comment}</div> */}
+          <div style={{ marginTop: "20px", marginLeft: "-80px" }}>
+            <label htmlFor="comment">Comment</label>
+            <br></br>
+            <input
+              type="text"
+              id="comment"
+              placeholder="comment"
+              name="comment"
+              size={65}
+              onChange={changeHandler}
+              value={comment}
+              style={{
+                fontSize: "20px",
+                color: "hsla(254, 19%, 14%, 0.815)",
+              }}
+            />
+          </div>
+          <button
+            type="submit"
+            style={{
+              float: "left",
+              marginTop: "8px",
+              fontSize: "15px",
+              width: "100px",
+              marginLeft: "-80px",
+            }}
+          >
+            {props.isEditing ? "Submit Edit" : "Submit"}
+          </button>
+          {props.isEditing && (
+            <button
+              onClick={props.editModeHandler}
+              style={{
+                marginTop: "8px",
+                fontSize: "15px",
+                marginLeft: "5px",
+                width: "100px",
+              }}
+            >
+              Cancel Edit
+            </button>
+          )}
+        </form>
+      </div>
     </>
   );
 };

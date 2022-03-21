@@ -100,16 +100,19 @@ const Comments: React.FC<CommentsProps> = (props) => {
         deleteComment={deleteComment}
       />
       {hasCommented === false && auth.isLoggedIn && (
-        <CommentForm
-          businessId={props.businessId}
-          reviewComment=""
-          commentId=""
-          isEditing={null}
-          doneEditing={() => {}}
-          addComment={addComment}
-          editComment={editComment}
-          deleteComment={deleteComment}
-        />
+        <div style={{ marginLeft: "100px" }}>
+          <CommentForm
+            businessId={props.businessId}
+            reviewComment=""
+            commentId=""
+            isEditing={null}
+            doneEditing={() => {}}
+            addComment={addComment}
+            editComment={editComment}
+            deleteComment={deleteComment}
+            editModeHandler={() => {}}
+          />
+        </div>
       )}
     </>
   );

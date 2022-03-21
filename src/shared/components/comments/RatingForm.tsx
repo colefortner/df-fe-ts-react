@@ -7,10 +7,8 @@ import PawRatingSelected from "../UIElements/Paws/PawRatingSelected";
 const RatingBox = styled.div`
   background: #fff;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   flex-direction: row-reverse;
-  position: relative;
-  margin-top: 12px;
 
   input {
     display: none;
@@ -86,7 +84,7 @@ const RatingForm: React.FC<RatingProps> = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <RatingBox>{ratingMenu}</RatingBox>;
+      <RatingBox>{ratingMenu}</RatingBox>
       {/* <button type="submit">Submit Rating</button> */}
     </form>
   );
