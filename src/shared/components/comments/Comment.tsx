@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { TiDelete, TiEdit } from "react-icons/ti";
+import { MdEdit } from "react-icons/md";
 
 import CommentForm from "./ComentForm";
 import Rating from "../UIElements/Rating";
@@ -71,7 +72,7 @@ const Comment: React.FC<CommentProps> = (props) => {
   return (
     <div style={{ marginBottom: "30px" }}>
       {isEditing === true ? (
-        <div style={{ marginLeft: "100px", display: "flex" }}>
+        <div style={{ display: "flex" }}>
           <CommentForm
             businessId={props.businessId}
             reviewComment={props.review}
@@ -85,7 +86,6 @@ const Comment: React.FC<CommentProps> = (props) => {
           />
         </div>
       ) : (
-        // </div>
         <div>
           <div style={{ display: "flex" }}>
             <Avatar
@@ -107,7 +107,8 @@ const Comment: React.FC<CommentProps> = (props) => {
               fontSize: "20px",
               marginTop: "10px",
               color: "hsla(254, 19%, 14%, 0.815)",
-              maxWidth: "800px",
+              width: "83%",
+              marginBottom: "5px",
             }}
           >
             {props.review}
@@ -115,16 +116,20 @@ const Comment: React.FC<CommentProps> = (props) => {
         </div>
       )}
       {auth.userId === props.commentUserId && !isEditing && (
-        <div style={{ float: "right", marginTop: "-52px" }}>
+        <div style={{}}>
           <button
             onClick={editModeHandler}
-            style={{ all: "unset", color: "navy-blue", fontSize: "30px" }}
+            style={{
+              border: "none",
+              color: "blue",
+              fontSize: "30px",
+            }}
           >
             <TiEdit />
           </button>
           <button
             onClick={deleteHandler}
-            style={{ all: "unset", color: "red", fontSize: "30px" }}
+            style={{ border: "none", color: "red", fontSize: "30px" }}
           >
             <TiDelete />
           </button>

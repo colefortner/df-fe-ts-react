@@ -100,7 +100,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
         deleteComment={deleteComment}
       />
       {hasCommented === false && auth.isLoggedIn && (
-        <div style={{ marginLeft: "100px" }}>
+        <div>
           <CommentForm
             businessId={props.businessId}
             reviewComment=""

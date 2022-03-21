@@ -16,12 +16,12 @@ const RatingBox = styled.div`
 
   label {
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 1.9rem;
+    height: 1.7rem;
     background-image: url("data:image/svg+xml;charset=UTF-8,${PawRatingUntouched}");
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 70%;
+    // background-position: center;
+    background-size: 80%;
   }
 
   input: checked ~ label,
