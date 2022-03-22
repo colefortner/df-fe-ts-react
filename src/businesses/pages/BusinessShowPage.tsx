@@ -41,13 +41,6 @@ interface Business {
     }[];
   };
 }
-const TopContainer = styled.div`
-  display: flex;
-`;
-
-const ContactHours = styled.div`
-  margin-left: ${(props) => props.theme.space[4]};
-`;
 
 const Title = styled.h1`
   font-size: 30px;
@@ -57,6 +50,22 @@ const Title = styled.h1`
   margin-bottom: ${(props) => props.theme.space[3]};
   margin-top: ${(props) => props.theme.space[3]};
   margin-left: ${(props) => props.theme.space[5]};
+`;
+
+const TopContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: ${(props) => props.theme.space[5]};
+`;
+
+const Image = styled.img`
+  width: 500px;
+  border-radius: 10px;
+  diplay: inline-block;
+`;
+
+const ContactHours = styled.div`
+  margin-left: ${(props) => props.theme.space[4]};
 `;
 
 const WebAddress = styled.a`
@@ -115,13 +124,6 @@ const MapContainer = styled.div`
   margin-left: ${(props) => props.theme.space[4]};
 `;
 
-const Image = styled.img`
-  width: 500px;
-  border-radius: 10px;
-  margin-left: ${(props) => props.theme.space[5]};
-  diplay: inline-block;
-`;
-
 const CommentsPromotionsContainer = styled.div`
   display: flex;
   width: 100%;
@@ -129,7 +131,7 @@ const CommentsPromotionsContainer = styled.div`
 
 const CommentsContainer = styled.div`
   margin-top: ${(props) => props.theme.space[4]};
-  margin-left: ${(props) => props.theme.space[5]};
+  // margin-left: ${(props) => props.theme.space[5]};
   width: 50%;
 
   h2 {
@@ -263,25 +265,26 @@ const BusinessShowPage: React.FC = (props) => {
           </Address>
           <Map center={cardData.location} zoom={15} />
         </MapContainer>
+        <CommentsPromotionsContainer>
+          <CommentsContainer>
+            <h2>Reviews</h2>
+            <CommentContainer>
+              <Comments
+                businessId={cardData.businessId}
+                getRatingUpdate={getRatingUpdates}
+              />
+            </CommentContainer>
+          </CommentsContainer>
+          {/* <RatingForm /> */}
+          <PromotionsContainer>
+            <h2 style={{ fontSize: "25px" }}>Events/Promotions</h2>
+            <div style={{ marginLeft: "8px" }}>
+              <Promotions businessId={params.businessId} />
+            </div>
+          </PromotionsContainer>
+        </CommentsPromotionsContainer>
       </TopContainer>
-      <CommentsPromotionsContainer>
-        <CommentsContainer>
-          <h2>Reviews</h2>
-          <CommentContainer>
-            <Comments
-              businessId={cardData.businessId}
-              getRatingUpdate={getRatingUpdates}
-            />
-          </CommentContainer>
-        </CommentsContainer>
-        {/* <RatingForm /> */}
-        <PromotionsContainer>
-          <h2 style={{ fontSize: "25px" }}>Events/Promotions</h2>
-          <div style={{ marginLeft: "8px" }}>
-            <Promotions businessId={params.businessId} />
-          </div>
-        </PromotionsContainer>
-      </CommentsPromotionsContainer>
+
       <a href="https://www.flaticon.com/free-icons/paw" title="paw icons">
         Paw icon used as google map marker created by deemakdaksina - Flaticon
       </a>

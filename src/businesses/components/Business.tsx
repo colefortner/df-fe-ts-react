@@ -83,21 +83,31 @@ const Open = styled.div`
 `;
 
 const SaveButton = styled.button`
-  all: unset;
+  // all: unset;
+  background: none;
+  border: none;
   position: absolute;
   font-size: 30px;
   margin-top: 20px;
   margin-left: 170px;
   color: white;
+  &:focus {
+    background: black;
+  }
 `;
 
 const DeleteButton = styled.button`
-  all: unset;
+  // all: unset;
+  background: none;
+  border: none;
   position: absolute;
   font-size: 30px;
   margin-top: 20px;
   margin-left: 170px;
   color: hsla(353, 100%, 62%, 1);
+  &:focus {
+    background: white;
+  }
 `;
 
 const RestaurantName = styled.h2`

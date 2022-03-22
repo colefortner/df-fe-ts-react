@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import styled from "styled-components";
 import { unstable_batchedUpdates } from "react-dom";
 import { TiDelete, TiEdit, TiInputChecked, TiCancel } from "react-icons/ti";
 
@@ -92,7 +93,7 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
     props.doneEditing(false);
     props.editComment(props.commentId, comment, review);
   };
-
+  let business = "Pinellas";
   return (
     <div>
       <div style={{ display: "flex" }}>
@@ -117,7 +118,7 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
             <input
               type="text"
               id="comment"
-              placeholder="comment"
+              placeholder={`Tell us what you thought!`}
               name="comment"
               size={65}
               onChange={changeHandler}

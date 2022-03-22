@@ -21,7 +21,6 @@ const TitleContainer = styled.div`
 `;
 
 const Title = styled.h1`
-
   position: absolute;
   color: white;
   margin-left: 70px;
@@ -83,7 +82,14 @@ const ListItem = styled.li`
 `;
 
 const Button = styled.button`
-  all: unset;
+  // all: unset;
+  background: none;
+  color: white;
+  border: none;
+  font-size: 25px;
+  &:hover {
+    color: #000;
+  }
 `;
 
 const NavLinks: React.FC = () => {
