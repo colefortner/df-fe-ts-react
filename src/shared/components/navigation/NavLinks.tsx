@@ -9,10 +9,10 @@ import AdoptionSwiperCube from "../../components/adoption-cube/AdoptionSwiperCub
 
 const TitleContainer = styled.div`
   position: absolute;
-  margin-top: 50px;
+  margin-top: 3vw;
   background-color: rgba(0, 0, 0, 0.5);
-  height: 300px;
-  width: 700px;
+  height: 21vw;
+  width: 46vw;
   border-radius: 100%;
   transform: rotate(-2.3deg);
   text-align: center;
@@ -23,40 +23,39 @@ const TitleContainer = styled.div`
 const Title = styled.h1`
   position: absolute;
   color: white;
-  margin-left: 70px;
-  margin-top: 50px;
+  margin-left: 5vw;
+  margin-top: 3vw;
   font-family: ${(props) => props.theme.fonts.body};
-  font-size 100px;
-  padding: 5px;
+  font-size 6.5vw;
+  padding: .5vw;
   border-radius: 100%;
 `;
 
 const SubTitle = styled.h2`
   position: absolute;
   color: white;
-  margin-top: 160px;
-  margin-left: 38px;
+  margin-top: 10.5vw;
+  margin-left: 2.5vw;
   font-weight: 200;
   font-family: ${(props) => props.theme.fonts.fancy};
-  font-size: 50px;
+  font-size: 3.3vw;
   // transform: rotate(-2.3deg);
 `;
 
 const ListContainer = styled.div`
-  text-align: right;
   width: 100%;
-  height: 75px;
-  padding: 50px;
+  margin-top: 25px;
+  margin-right: 25px;
 `;
+
 const LinkList = styled.ul`
   list-style: none;
-  display: inline-block;
-  font-size: 30px;
-  height: 75px;
+  float: right;
+
   a {
     text-decoration: none;
     color: white;
-    margin: 10px;
+    width: 100%;
     &:hover {
       color: #000;
     }
@@ -72,8 +71,9 @@ const ListItem = styled.li`
   cursor: pointer;
   transition: ease-in-out 0.1s;
   border: 1px solid #fff;
-  float: right;
+  float: left;
   height: 75px;
+
   &:hover {
     background: rgba(255, 255, 255, 0.4);
     color: #000;
