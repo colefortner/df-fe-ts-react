@@ -18,12 +18,17 @@ const Businesses: React.FC = () => {
   `;
 
   useEffect(() => {
-    fetch("http://localhost:5050/businesses")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchBusinesses = async () => {
+      try {
+        const res = await fetch("http://localhost:5050/businesses");
+        const data = await res.json();
         setBusinessesData(data.businesses);
         // console.log(data.businesses);
-      });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchBusinesses();
   }, []);
 
   const getPromotionsData = (data: any) => {
