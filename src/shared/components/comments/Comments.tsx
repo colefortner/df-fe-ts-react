@@ -24,12 +24,19 @@ const Comments: React.FC<CommentsProps> = (props) => {
   props.getRatingUpdate(ratingAvg, ratingsLength);
 
   useEffect(() => {
-    fetch(`http://localhost:5050/comments/${props.businessId}`)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchComments = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5050/comments/${props.businessId}`
+        );
+        const data = await res.json();
         setCommentsData(data.comments);
-        console.log(data);
-      });
+        // console.log(data.comments);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchComments();
   }, []);
 
   const addComment = (
