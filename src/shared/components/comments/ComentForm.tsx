@@ -119,7 +119,7 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
             <p>Some message or data</p>
           </div>
           {/* <div>{comment}</div> */}
-          <div style={{ marginTop: "10px", marginLeft: "-75px" }}>
+          <div style={{ marginTop: "8px", marginLeft: "-75px" }}>
             <input
               type="text"
               id="comment"
