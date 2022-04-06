@@ -5,16 +5,18 @@
 <p>Currently users can create an account, browse dog friendly businesses/services in the St. Petersburg area, save their favorite businesses to their account dashboard and rate/review businesses.</p>
 
 # Tech Used
+
 <p>Front End:  TypeScript, React, JavaScript, Styled Components, HTML, CSS<p>
-<p>API:  Node, TypeScript, Express, Mongoose</p>
+<p>REST API:  Node, TypeScript, Express, Mongoose</p>
 <p>Databse: MongoDB</p>
 
 ## Landing Page
+
 ![landing page](https://raw.githubusercontent.com/colefortner/colefortner/main/sashaslist-landing.png)
 
 ## Business Show Page
-![sashaslist-business-showpage](https://user-images.githubusercontent.com/20844376/159143150-d55ec0aa-bd87-45b1-92bd-d689d77fe22b.png)
 
+![sashaslist-business-showpage](https://user-images.githubusercontent.com/20844376/159143150-d55ec0aa-bd87-45b1-92bd-d689d77fe22b.png)
 
 # Getting Started with Create React App
 
