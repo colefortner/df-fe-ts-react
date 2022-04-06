@@ -66,7 +66,7 @@ const ListItem = styled.li`
   color: #fff;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
-  padding: 20px;
+  // padding: 20px;
   font-size: 25px;
   cursor: pointer;
   transition: ease-in-out 0.1s;
@@ -81,8 +81,14 @@ const ListItem = styled.li`
   }
 `;
 
+const StyledNavLink = styled(NavLink)`
+  display: inline-block;
+  padding: 20px;
+`;
+
 const Button = styled.button`
   // all: unset;
+  padding: 20px;
   background: none;
   color: white;
   border: none;
@@ -108,17 +114,19 @@ const NavLinks: React.FC = () => {
         <LinkList>
           {!isCurrentURL("/") && (
             <ListItem>
-              <NavLink to="/">Home</NavLink>
+              <StyledNavLink to="/">Home</StyledNavLink>
             </ListItem>
           )}
           {auth.isLoggedIn && !isCurrentURL("/users") && (
             <ListItem>
-              {auth.isLoggedIn && <NavLink to="/users">Dashboard</NavLink>}
+              {auth.isLoggedIn && (
+                <StyledNavLink to="/users">Dashboard</StyledNavLink>
+              )}
             </ListItem>
           )}
           {!auth.isLoggedIn && (
             <ListItem>
-              <NavLink to="/auth">Login/Signup</NavLink>
+              <StyledNavLink to="/auth">Login/Signup</StyledNavLink>
             </ListItem>
           )}
           {auth.isLoggedIn && (
