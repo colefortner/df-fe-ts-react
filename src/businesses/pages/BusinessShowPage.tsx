@@ -171,6 +171,8 @@ const BusinessShowPage: React.FC = (props) => {
     setLength(length);
   };
 
+  const displayRating = (Math.round(avgRating * 100) / 100).toFixed(2);
+
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
   const newDay = new Date();
   const dayName = newDay.getDay();
@@ -229,7 +231,7 @@ const BusinessShowPage: React.FC = (props) => {
             <p>No reviews yet</p>
           ) : (
             <p>
-              {avgRating} out of {length} reviews
+              {displayRating} out of {length} reviews
             </p>
           )}
           <Phone>

@@ -18,7 +18,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
     (result, comment) => result + comment.rating,
     0
   );
-
+  // toFixed() converts the result to at string for some reason
   const ratingAvg = ratingsSum / ratingsLength;
 
   props.getRatingUpdate(ratingAvg, ratingsLength);
