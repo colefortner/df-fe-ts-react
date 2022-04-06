@@ -1,3 +1,14 @@
+<h1>
+  <h1 align="center">Sasha's List</h1>
+</h1>
+<p align="center">Sasha's List is community based social and information app for dog owners in the St. Petersburg Florida area. </p>
+<p>Currently users can create an account, browse dog friendly businesses/services in the St. Petersburg area, save their favorite businesses to their account dashboard and rate/review businesses.</p>
+
+# Tech Used
+<p>Front End:  TypeScript, React, JavaScript, Styled Components, HTML, CSS<p>
+<p>API:  Node, TypeScript, Express, Mongoose</p>
+<p>Databse: MongoDB</p>
+
 ## Landing Page
 ![landing page](https://raw.githubusercontent.com/colefortner/colefortner/main/sashaslist-landing.png)
 
