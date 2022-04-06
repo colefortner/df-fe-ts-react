@@ -102,7 +102,12 @@ const CommentForm: React.FC<CommentFormProps> = (props) => {
             src={`http://localhost:5050/${auth.avatar}`}
             // src="https://www.industrialempathy.com/img/remote/ZiClJf-640w.avif"
             alt="User"
-            style={{ width: 75, height: 75, borderRadius: "100px" }}
+            style={{
+              width: 75,
+              height: 75,
+              borderRadius: "100px",
+              objectFit: "cover",
+            }}
           />
         </div>
         <form onSubmit={props.isEditing ? editHandler : submitHandler}>

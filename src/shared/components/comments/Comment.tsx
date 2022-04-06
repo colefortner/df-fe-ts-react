@@ -92,7 +92,12 @@ const Comment: React.FC<CommentProps> = (props) => {
               src={`http://localhost:5050/${props.userAvatar}`}
               // src="https://www.industrialempathy.com/img/remote/ZiClJf-640w.avif"
               alt="User"
-              style={{ width: 75, height: 75, borderRadius: "100px" }}
+              style={{
+                width: 75,
+                height: 75,
+                borderRadius: "100px",
+                objectFit: "cover",
+              }}
             />
             <div style={{ marginLeft: "20px", marginTop: "-10px" }}>
               <p style={{ fontSize: "30px", fontWeight: "bold" }}>
