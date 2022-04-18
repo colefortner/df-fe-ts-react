@@ -221,7 +221,7 @@ const BusinessShowPage: React.FC = (props) => {
       {/* <p>{params.businessId}</p> */}
       <Title>{cardData.name}</Title>
       <TopContainer>
-        <Image src={cardData.image} alt={cardData.name} />
+        <Image src={cardData.image} alt={`${cardData.name}`} />
         <ContactHours>
           <WebAddress href={`https://www.${cardData.website}`}>
             {cardData.website}

@@ -158,7 +158,7 @@ const Business: React.FC<BusinessProps> = (props) => {
         }}
       >
         {/* <h2>Business Number: {props.businessId}</h2> */}
-        <Image src={props.image} alt={props.name} />
+        <Image src={props.image} alt={`${props.name}`} />
         <RestaurantName>{props.name}</RestaurantName>
 
         <RatingContainer>

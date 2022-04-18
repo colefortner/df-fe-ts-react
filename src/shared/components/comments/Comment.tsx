@@ -91,7 +91,7 @@ const Comment: React.FC<CommentProps> = (props) => {
             <Avatar
               src={`http://localhost:5050/${props.userAvatar}`}
               // src="https://www.industrialempathy.com/img/remote/ZiClJf-640w.avif"
-              alt="User"
+              alt={`Avatar for user ${props.username}`}
               style={{
                 width: 75,
                 height: 75,
