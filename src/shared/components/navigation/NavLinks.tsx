@@ -124,7 +124,7 @@ const NavLinks: React.FC = () => {
               )}
             </ListItem>
           )}
-          {!auth.isLoggedIn && (
+          {!auth.isLoggedIn && !isCurrentURL("/auth") && (
             <ListItem>
               <StyledNavLink to="/auth">Login/Signup</StyledNavLink>
             </ListItem>
